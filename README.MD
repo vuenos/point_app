@@ -19,6 +19,34 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 May 7, 2024
+- 서버요청 방식을 async 로 변경
+- 서버응답상태에 따라 커스텀 메시지 적용
+```javascript
+const callDataHandler = async () => {
+    try {
+        const { data, status } = await axios.get("http://localhost:5500/getdata");
+
+        if (status === 200) {
+        console.log(data);
+        setMsg(data);
+        setCallStatus("suceess");
+        }
+    } catch(error: any) {
+        console.log(error);
+        setMsg("서버 통신을 실패하였습니다.");
+        setCallStatus("failed");
+    };
+};
+
+<div>
+    {msg && (callStatus === "suceess") ? <CallStackSuccess /> 
+        : (callStatus === "failed") ? <CallStackFailed />
+        : null
+    }
+</div>
+```
+
 ### 📆 May 8, 2024
 - 백엔드 호출 테스트
 - 이벤트핸들러 (callDataHandler) 버튼을 통해서 서버요청을 테스트
