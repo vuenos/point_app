@@ -3,7 +3,7 @@ import next from "next";
 import cors from "cors";
 import colors from "@colors/colors";
 import dotenv from "dotenv";
-import connectDB from "./config/db.js"
+import connectDB from "./config/db.js";
 
 dotenv.config();
 
