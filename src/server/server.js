@@ -1,6 +1,14 @@
 import express from "express";
 import next from "next";
 import cors from "cors";
+import colors from "@colors/colors";
+import dotenv from "dotenv";
+import connectDB from "./config/db.js"
+
+dotenv.config();
+
+connectDB();
+
 
 const dev = process.env.NODE_ENV !== "production";
 const port = process.env.PORT || 5500;
@@ -15,6 +23,8 @@ app.prepare().then(() => {
     const server = express();
 
     server.use(cors());
+    server.use(express.json());
+    server.use(express.urlencoded({ extended: true }))
 
     server.get("/", (req, res) => {
         res.send(
@@ -32,7 +42,7 @@ app.prepare().then(() => {
 
     server.listen(port, () => {
         console.log(
-            `Server running is ${process.env.NODE_ENV} mode on port ${port}`
+            `Server running is ${process.env.NODE_ENV} mode on port ${port}`.yellow.bold
         );
     });
 });
