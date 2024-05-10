@@ -3,7 +3,10 @@ import next from "next";
 import cors from "cors";
 import colors from "@colors/colors";
 import dotenv from "dotenv";
+import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import connectDB from "./config/db.js";
+
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -24,7 +27,9 @@ app.prepare().then(() => {
 
     server.use(cors());
     server.use(express.json());
-    server.use(express.urlencoded({ extended: true }))
+    server.use(express.urlencoded({ extended: true }));
+
+    server.use("/api/users", userRoutes);
 
     server.get("/", (req, res) => {
         res.send(
@@ -39,6 +44,9 @@ app.prepare().then(() => {
     server.all("*", (req, res) => {
         return handle(req, res);
     });
+
+    server.use(notFound);
+    server.use(errorHandler);
 
     server.listen(port, () => {
         console.log(
