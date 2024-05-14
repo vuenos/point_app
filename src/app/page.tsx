@@ -1,12 +1,10 @@
-'use client';
-import { useEffect, useState } from "react";
-import styles from "./page.module.css";
+"use client";
+import { useState } from "react";
 import axios from "axios";
 
 export default function Home() {
   const [msg, setMsg] = useState<string>("");
   const [callStatus, setCallStatus] = useState<string>();
-  const [array1, setArray1] = useState([0,1,2,3,4,5,6]);
 
   const CallStackSuccess = () => (
     <div style={{ color: "blue" }}>🌝 {msg}</div>
@@ -30,14 +28,8 @@ export default function Home() {
     };
   };
 
-  useEffect(() => {
-    for (let i of array1) {
-      console.log(i)
-    }
-  }, []);
-
   return (
-    <main className={styles.main}>
+    <main>
       <button onClick={callDataHandler}>데이터 요청</button>
 
       <div>
