@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
+import Header from "@/components/common/Header";
+import StyledComponentsRegistry from "@/lib/registry";
 
 const noto = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -16,7 +18,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={noto.className}>
-        {children}
+        <StyledComponentsRegistry>
+          <Header />
+          {children}
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
