@@ -9,7 +9,9 @@ export default function Header() {
 
     return (
         <HeaderSection>
-            <h1>App</h1>
+            <h1>
+                <Link href="/">App</Link>
+            </h1>
             <nav>
                 <Link href="/member/mypage">{userName}</Link>
                 <Link href="/member/join">Sign up</Link>

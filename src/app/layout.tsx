@@ -4,6 +4,7 @@ import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import StyledComponentsRegistry from "@/lib/registry";
 import GlobalStyles from "@/styles/GlobalStyles";
+import Wrapper from "@/components/common/Wrapper";
 
 const noto = Noto_Sans_KR({ subsets: ["latin"] });
 
@@ -23,7 +24,7 @@ export default function RootLayout({
         <StyledComponentsRegistry>
           <GlobalStyles />
           <Header />
-          {children}
+            <Wrapper>{children}</Wrapper>
           <Footer />
         </StyledComponentsRegistry>
       </body>
