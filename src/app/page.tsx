@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
-import { MainSection } from "@/styles/LayoutStyles";
 
 export default function Home() {
   const [msg, setMsg] = useState<string>("");
@@ -30,7 +29,7 @@ export default function Home() {
   };
 
   return (
-    <MainSection>
+    <>
       <button onClick={callDataHandler}>데이터 요청</button>
 
       <div>
@@ -39,6 +38,6 @@ export default function Home() {
           : null
         }
       </div>
-    </MainSection>
+    </>
   );
 }

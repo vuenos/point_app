@@ -10,9 +10,21 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        font-family: Pretendard;
+        font-size: 14px;
     }
 
+    h2 {
+        font-size: 1.8em;
+    }
+
+    h3 {
+        font-size: 1.6em;
+    }
+
+    h4 {
+        font-size: 1.4em;
+    }
+    
     strong {
         font-weight: 700;
     }

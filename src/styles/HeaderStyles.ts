@@ -17,7 +17,30 @@ const HeaderSection = styled.div`
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .06);
 
     h1 {
-        line-height: 76px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 48px;
+        height: 48px;
+        background-color: #000;
+        text-align: center;
+        color: #ffffff;
+        border-radius: 100%;
+
+        a {
+            color: #ffffff;
+        }
+    }
+
+    nav {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        a {
+            margin-left: 24px;
+            color: #727272;
+        }
     }
 `;
 
