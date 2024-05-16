@@ -1,12 +1,20 @@
 "use client";
-import { useState } from "react"
+import { useState } from "react";
+import Link from "next/link";
+import { HeaderSection } from "@/styles/HeaderStyles";
+
 
 export default function Header() {
-    const [name, setName] = useState<string>("User");
+    const [userName, setUserName] = useState<string>("John Doe");
 
     return (
-        <div>
-            <h1>Header {name}</h1>
-        </div>
+        <HeaderSection>
+            <h1>App</h1>
+            <nav>
+                <Link href="/member/mypage">{userName}</Link>
+                <Link href="/member/join">Sign up</Link>
+                <Link href="/member/login">Login</Link>
+            </nav>
+        </HeaderSection>
     )
 }
