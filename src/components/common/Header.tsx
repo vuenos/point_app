@@ -25,6 +25,7 @@ export default function Header() {
             <nav>
                 {menuData.map((menuItem) => (
                     <Link
+                        key={menuItem.id}
                         href={menuItem.path}
                         className={`${menuItem.path === pathname ? "active" : ""}`}
                     >
