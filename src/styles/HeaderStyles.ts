@@ -49,6 +49,12 @@ const HeaderSection = styled.div`
                 color: #1a1a1a;
             }
             
+            &.active {
+                font-weight: 700;
+                color: #000000;
+                letter-spacing: -0.024em;
+            }
+            
             svg {
                 margin-right: 4px;
             }

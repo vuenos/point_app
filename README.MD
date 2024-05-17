@@ -19,6 +19,55 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 May 18, 2024
+헤더의 공통 네비게이션에서 현재 메뉴의 활성화 스타일 적용  
+React 에서는 NavLink 를 이용하면 쉽게 적용이 되지만 Next.js 에서는 지원하지 않는다.  
+그래서 커스텀을 해야 한다.
+- 1차 방법 : next/router 의 useRouter 를 이용해서 현재페이지의 pathname 을 특정해서 비교하는 방법
+- 먼저 메뉴의 정보에 대한 객체 배열을 만들어 주고, 
+```javascript
+const menuData = [
+    { id: "menu01", title: `${userName}`, path: "/member/mypage" },
+    { id: "menu02", title: "Login", path: "/member/login" },
+    { id: "menu03", title: "Sign up", path: "/member/join" },
+];
+```
+- path 값과 현재 pathname 을 비교하여 특정 스타일을 적용한다.
+```javascript
+const router = useRouter();
+
+{menuData.map((menuItem) => (
+    <Link
+        href={menuItem.path}
+        className={`${menuItem.path === router.pathname ? "active" : ""}`}
+    >
+        {menuItem.title}
+    </Link>
+))}
+```
+그런데 다음과 같은 에러가 뜬다.  
+<span style="color: red">Error: NextRouter was not mounted.</span>  
+Next.js 13 부터는 next/router 대신 next/navigation 를 사용해야 한다.
+```javascript
+// refactor
+import { usePathname } from "next/navigation";
+
+const pathname = usePathname();
+
+{menuData.map((menuItem) => (
+    <Link
+        href={menuItem.path}
+        className={`${menuItem.path === pathname ? "active" : ""}`}
+    >
+        {menuItem.title}
+    </Link>
+))}
+```  
+참고 : https://nextjs.org/docs/app/api-reference/functions/use-router  
+
+***  
+
+
 ### 📆 May 16, 2024
 #### Next.js App Router
 Next.js 13 부터 app/ 디렉토리를 기반으로 라우팅이 구성된다.  
