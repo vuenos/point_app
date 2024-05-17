@@ -5,10 +5,6 @@ import { FooterSection } from "@/styles/FooterStyles";
 export default function Footer() {
     return (
         <FooterSection>
-            <div className="small-bi">
-                <Link href="/">App</Link>
-            </div>
-            
             <div className="copy">
                 &copy; Pointapp
             </div>
