@@ -19,10 +19,127 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 May 16, 2024
+#### Next.js App Router
+Next.js 13 부터 app/ 디렉토리를 기반으로 라우팅이 구성된다.  
+app/about 이란 dir 를 만들고 page.tsx 를 생성하면 /about 이란 route 가 구성이 되는 것이다.  
+Layout.tsx 로 레이아웃을 구성할 수 있다. /app/page.tsx 가 "/" 이란 route 가 된다.
+```javascript
+// app/layout.js
+export default function RootLayout({
+   children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
+    return (
+        <html lang="ko">
+            <body>
+                <Header />
+                <Wrapper>{children}</Wrapper>
+                <Footer />
+            </body>
+        </html>
+    );
+}
+
+// app/page.js
+export default function Page() {
+  return <h1>Hello, World</h1>;
+}
+```
+- /app/member/login/page.tsx : /member/login
+
 ### 📆 May 13, 2024
 - User 데이터 모델 생성
-- /server 내에 routes, models, controller 를 생성한다.
-- models 에서 
+- /server/ 내에 routes, models, controller 를 생성한다.
+- routes/userRoutes.js 에 백엔드에서 요청받을 routes 를 정의한다.
+```javascript
+const router = express.Router();
+
+router.route("/")
+    .post(registerUser)
+    .get(protect, admin)
+
+router
+    .post("/login", authUser)
+
+router
+    .route('/profile')
+    .get(protect, getUserProfile)
+    .put(protect, updateUserProfile)
+
+router
+    .route('/:id')
+    .delete(protect, admin, deleteUser)
+    .get(protect, admin, getUserById)
+    .put(protect, admin, updateUser)
+```
+- models/userModel.js 에서 유저데이터 schema 를 구성함. 
+```javascript
+const userSchema = mongoose.Schema(
+    {
+        name: {
+            type: String,
+            required: true,
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        password: {
+            type: String,
+            required: true,
+        },
+        isAdmin: {
+            type: String,
+            required: true,
+            default: false,
+        },
+    },
+    {
+        timestamps: true,
+    }
+);
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
+// User model 을 User 로 정의해서 내보낸다
+```
+- controller/userController.js : registerUser 핸들러를 통해 userModel 에서 가져온 User 모델에 맞추어 입력받은 유저데이터를 생성한다.
+```javascript
+const registerUser = asyncHandler(async (req, res) => {
+    const { name, email, isAdmin, password } = req.body
+
+    const userExists = await User.findOne({ email })
+
+    if (userExists) {
+        res.status(400)
+        throw new Error('User already exists')
+    }
+
+    const user = await User.create({
+        name,
+        email,
+        isAdmin,
+        password,
+    })
+
+    if (user) {
+        res.status(201).json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            token: generateToken(user._id),
+        })
+    } else {
+        res.status(400)
+        throw new Error('Invalid user data')
+    }
+});
+```
 
 ### 📆 May 7, 2024
 - 서버요청 방식을 async 로 변경
