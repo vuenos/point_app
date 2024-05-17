@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { HeaderSection } from "@/styles/HeaderStyles";
+import { RiUser3Fill } from "react-icons/ri";
 
 
 export default function Header() {
@@ -13,7 +14,7 @@ export default function Header() {
                 <Link href="/">App</Link>
             </h1>
             <nav>
-                <Link href="/member/mypage">{userName}</Link>
+                <Link href="/member/mypage"><RiUser3Fill />{userName}</Link>
                 <Link href="/member/join">Sign up</Link>
                 <Link href="/member/login">Login</Link>
             </nav>

@@ -39,14 +39,18 @@ const HeaderSection = styled.div`
         font-size: 16px;
 
         a {
-            display: inline-block;
+            display: flex;
+            align-items: center;
             margin-left: 24px;
             color: #727272;
-            line-height: 24px;
+            line-height: 32px;
 
             &:hover {
-                color: #333333;
-                border-bottom: 1px solid #727272;
+                color: #1a1a1a;
+            }
+            
+            svg {
+                margin-right: 4px;
             }
         }
     }
