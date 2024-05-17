@@ -52,6 +52,8 @@ export default function Page() {
 - /app/member/login/page.tsx : /member/login
 - 참고 : https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates
 
+***  
+
 ### 📆 May 13, 2024
 - User 데이터 모델 생성
 - /server/ 내에 routes, models, controller 를 생성한다.
@@ -144,7 +146,9 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 ```
 
-### 📆 May 7, 2024
+***  
+
+### 📆 May 10, 2024
 - 서버요청 방식을 async 로 변경
 - 서버응답상태에 따라 커스텀 메시지 적용
 ```javascript
@@ -171,6 +175,9 @@ const callDataHandler = async () => {
     }
 </div>
 ```
+
+***
+  
 
 ### 📆 May 8, 2024
 - 백엔드 호출 테스트
