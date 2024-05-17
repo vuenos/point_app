@@ -23,7 +23,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 #### Next.js App Router
 Next.js 13 부터 app/ 디렉토리를 기반으로 라우팅이 구성된다.  
 app/about 이란 dir 를 만들고 page.tsx 를 생성하면 /about 이란 route 가 구성이 되는 것이다.  
-Layout.tsx 로 레이아웃을 구성할 수 있다. /app/page.tsx 가 "/" 이란 route 가 된다.
+Layout.tsx 로 레이아웃을 구성할 수 있다. /app/page.tsx 가 "/" 이란 route 가 된다.  
+Layout 은 여러 경로 간에 공유되는 UI 이다. Route 간의 이동 시 레이아웃 상태를 유지하고 상호교환 상태를 유지하며 리렌더링 되지 않는다.  
+<img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Flayout-special-file.png&w=3840&q=75" width="600">
 ```javascript
 // app/layout.js
 export default function RootLayout({
@@ -48,6 +50,7 @@ export default function Page() {
 }
 ```
 - /app/member/login/page.tsx : /member/login
+- 참고 : https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates
 
 ### 📆 May 13, 2024
 - User 데이터 모델 생성
