@@ -36,10 +36,18 @@ const HeaderSection = styled.div`
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        font-size: 16px;
 
         a {
+            display: inline-block;
             margin-left: 24px;
             color: #727272;
+            line-height: 24px;
+
+            &:hover {
+                color: #333333;
+                border-bottom: 1px solid #727272;
+            }
         }
     }
 `;

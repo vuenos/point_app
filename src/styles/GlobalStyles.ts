@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     h2 {

@@ -19,6 +19,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 May 13, 2024
+- User 데이터 모델 생성
+- /server 내에 routes, models, controller 를 생성한다.
+- models 에서 
+
 ### 📆 May 7, 2024
 - 서버요청 방식을 async 로 변경
 - 서버응답상태에 따라 커스텀 메시지 적용

@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
-import { timeStamp } from "console";
 
 const userSchema = mongoose.Schema(
     {
