@@ -5,9 +5,10 @@ import axios from "axios";
 export default function Home() {
   const [msg, setMsg] = useState<string>("");
   const [callStatus, setCallStatus] = useState<string>();
+  const [userData, setUserData] = useState<any>();
 
   const CallStackSuccess = () => (
-    <div style={{ color: "blue" }}>🌝 {msg}</div>
+    <div style={{ color: "blue" }}>🌝 Response OK</div>
   );
 
   const CallStackFailed = () => (
@@ -16,16 +17,18 @@ export default function Home() {
   
   const callDataHandler = async () => {
     try {
-      const { data, status } = await axios.get("http://localhost:5500/getdata");
+      const { data, status } = await axios.get("/api/users/");
 
       if (status === 200) {
-        console.log(data)
-        setMsg(data);
+        console.log(data);
+        setUserData(data);
         setCallStatus("suceess");
+        setMsg("서버에서 정상적으로 응답함");
       }
     } catch(error: any) {
-      setMsg("서버 통신을 실패하였습니다.");
+      console.log("서버 통신을 실패하였습니다.");
       setCallStatus("failed");
+      setMsg("서버 통신 실패");
     };
   };
 
@@ -34,10 +37,11 @@ export default function Home() {
       <button onClick={callDataHandler}>데이터 요청</button>
 
       <div>
-        {msg && (callStatus === "suceess") ? <CallStackSuccess /> 
+        {(callStatus === "suceess") ? <CallStackSuccess />
           : (callStatus === "failed") ? <CallStackFailed />
           : null
         }
+        {userData?.name}{userData?.email}
       </div>
     </>
   );
