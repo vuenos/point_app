@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "server": "nodemon src/server/server",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
