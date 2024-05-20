@@ -19,6 +19,7 @@ export default function Home() {
       const { data, status } = await axios.get("http://localhost:5500/getdata");
 
       if (status === 200) {
+        console.log(data)
         setMsg(data);
         setCallStatus("suceess");
       }
