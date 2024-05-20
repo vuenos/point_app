@@ -19,6 +19,14 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 May 20, 2024
+Express 로 백엔드를 구성했을때 이슈가 생겼다.  
+프론트와 별개로 서버호스팅을 구성해야 하는 것이다  
+vercel 로 deploy 하여 production 상태로 만들어서 온라인으로 접속해 보면 프론트는 정상적으로 보이지만  
+API 를 호출했을때 통신이 되지 않는다. 백엔드 리소스를 별도로 호스팅 하여 호출해야 하는 것이다.  
+- Next.js 로 개발하는데 Express 로 백엔드를 별도로 구성하기 보다 Next.js 의 [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 로 endpoint 를 만들면 되겠다는 생각이 들었다.
+- route 구성은 프론트와 동일하다. /app/api/users/route.ts 
+
 ### 📆 May 18, 2024
 헤더의 공통 네비게이션에서 현재 메뉴의 활성화 스타일 적용  
 React 에서는 NavLink 를 이용하면 쉽게 적용이 되지만 Next.js 에서는 지원하지 않는다.  
