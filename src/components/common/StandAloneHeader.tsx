@@ -1,23 +1,18 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { StandAloenHeaderSection } from "@/styles/HeaderStyles";
-import { ButtonBackToPage } from "@/styles/ComponentStyles";
-import { RiArrowLeftLine } from "react-icons/ri";
+import Link from "next/link";
 
 export default function StandAloneHeader () {
-    const router = useRouter();
 
     return (
         <StandAloenHeaderSection>
+            <h1>
+                <Link href="/">App</Link>
+            </h1>
+
             <nav>
-                <ButtonBackToPage 
-                    type="button" 
-                    onClick={() => router.back()}
-                >   
-                    <RiArrowLeftLine />
-                    Back to page
-                </ButtonBackToPage>
+                <Link href="/member/join">Sign Up</Link>
             </nav>
         </StandAloenHeaderSection>
     )

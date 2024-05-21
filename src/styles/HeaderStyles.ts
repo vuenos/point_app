@@ -22,7 +22,7 @@ const HeaderSection = styled.div`
         align-items: center;
         width: 48px;
         height: 48px;
-        background-color: #000;
+        background: linear-gradient(45deg, rgba(203,33,189,1) 0%, rgba(92,30,237,1) 100%);
         text-align: center;
         color: #ffffff;
         border-radius: 100%;
@@ -74,6 +74,52 @@ const StandAloenHeaderSection = styled.div`
     width: 100%;;
     height: 76px;
     padding: 0 24px;
+
+    h1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+        background: linear-gradient(45deg, rgba(203,33,189,1) 0%, rgba(92,30,237,1) 100%);
+        text-align: center;
+        color: #ffffff;
+        font-size: 0.7rem;
+        border-radius: 100%;
+
+        a {
+            color: #ffffff;
+        }
+    }
+
+    nav {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        font-size: 16px;
+
+        a {
+            display: flex;
+            align-items: center;
+            margin-left: 24px;
+            color: #727272;
+            line-height: 32px;
+
+            &:hover {
+                color: #1a1a1a;
+            }
+            
+            &.active {
+                font-weight: 700;
+                color: #000000;
+                letter-spacing: -0.024em;
+            }
+            
+            svg {
+                margin-right: 4px;
+            }
+        }
+    }
 `;
 
 export {
