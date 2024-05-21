@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import Header from "@/components/common/Header";
+import StandAloneHeader from "@/components/common/StandAloneHeader";
 import Footer from "@/components/common/Footer";
 import StyledComponentsRegistry from "@/lib/registry";
 import GlobalStyles from "@/styles/GlobalStyles";
@@ -23,7 +24,7 @@ export default function RootLayout({
       <body className={noto.className}>
         <StyledComponentsRegistry>
           <GlobalStyles />
-          <Header />
+            <Header />
             <Wrapper>{children}</Wrapper>
           <Footer />
         </StyledComponentsRegistry>

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { HeaderSection } from "@/styles/HeaderStyles";
-import { RiUser3Fill } from "react-icons/ri";
+import StandAloneHeader from "./StandAloneHeader";
 
 export default function Header() {
     const [userName, setUserName] = useState<string>("John Doe");
@@ -17,22 +17,28 @@ export default function Header() {
     ];
 
     return (
-        <HeaderSection>
-            <h1>
-                <Link href="/">App</Link>
-            </h1>
-
-            <nav>
-                {menuData.map((menuItem) => (
-                    <Link
-                        key={menuItem.id}
-                        href={menuItem.path}
-                        className={`${menuItem.path === pathname ? "active" : ""}`}
-                    >
-                        {menuItem.title}
-                    </Link>
-                ))}
-            </nav>
-        </HeaderSection>
+        <>
+            {pathname === "/member/login"
+                ? <StandAloneHeader />
+                : 
+                <HeaderSection>
+                    <h1>
+                        <Link href="/">App</Link>
+                    </h1>
+        
+                    <nav>
+                        {menuData.map((menuItem) => (
+                            <Link
+                                key={menuItem.id}
+                                href={menuItem.path}
+                                className={`${menuItem.path === pathname ? "active" : ""}`}
+                            >
+                                {menuItem.title}
+                            </Link>
+                        ))}
+                    </nav>
+                </HeaderSection>
+            }
+        </>
     )
 }
