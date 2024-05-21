@@ -33,6 +33,9 @@ const GlobalStyles = createGlobalStyle`
         -webkit-text-decoration: none;
         text-decoration: none;
     }
+    a:hover {
+        transition: all 0.3s;
+    }
 
     input,button,select,textarea {
         display: inline-block;
@@ -75,9 +78,5 @@ const GlobalStyles = createGlobalStyle`
         color-scheme: light only;
     }
 `;
-
-
-
-
 
 export default GlobalStyles;

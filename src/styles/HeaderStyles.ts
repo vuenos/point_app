@@ -62,6 +62,21 @@ const HeaderSection = styled.div`
     }
 `;
 
+const StandAloenHeaderSection = styled.div`
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;;
+    height: 76px;
+    padding: 0 24px;
+`;
+
 export {
-    HeaderSection
+    HeaderSection,
+    StandAloenHeaderSection
 }
