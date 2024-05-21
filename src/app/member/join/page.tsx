@@ -3,7 +3,7 @@
 export default function Join() {
     return (
         <>
-            <h2>Join</h2>
+            <h2>Sign Up</h2>
         </>
     );
 }
