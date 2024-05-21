@@ -21,13 +21,14 @@ export default function Home() {
   
   const callDataHandler = async () => {
     try {
-      const { data, status, statusText } = await axios.get(`${url}/test`);
+      const { data, status } = await axios.get(`${url}/test`);
 
       if (status === 200) {
-        console.log(status, statusText);
+        console.log(data);
+        console.log(status);
         setUserData(data);
         setCallStatus("suceess");
-        setMsg(`서버에서 정상적으로 응답함 [${status} ${statusText}]`);
+        setMsg(`서버에서 정상적으로 응답함 [${status}]`);
       }
     } catch(error: any) {
       console.log(error.message)

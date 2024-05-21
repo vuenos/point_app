@@ -25,7 +25,46 @@ Express 로 백엔드를 구성했을때 이슈가 생겼다.
 vercel 로 deploy 하여 production 상태로 만들어서 온라인으로 접속해 보면 프론트는 정상적으로 보이지만  
 API 를 호출했을때 통신이 되지 않는다. 백엔드 리소스를 별도로 호스팅 하여 호출해야 하는 것이다.  
 - Next.js 로 개발하는데 Express 로 백엔드를 별도로 구성하기 보다 Next.js 의 [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 로 endpoint 를 만들면 되겠다는 생각이 들었다.
-- route 구성은 프론트와 동일하다. /app/api/users/route.ts 
+- route 구성은 프론트와 동일하다. /app/api/users/route.ts 는 /api/users 라는 endpoint 를 만들어 준다.
+- /app/api/users/route.ts 에 호출시 반환되는 이벤트 핸들러를 작성해 주면 된다.
+- GET, POST 라는 함수명이 그대로 그 역활을 수행해 준다.  
+
+```javascript
+// /app/api/users/route.ts
+import {NextRequest, NextResponse} from "next/server";
+
+export async function GET(req: NextRequest) {
+    return NextResponse.json({
+        name: "Jintae Kim",
+        email: "vuenos@gmail.com",
+        isAdmin: true,
+    })
+}
+
+// /app/page.tsx
+const callDataHandler = async () => {
+    try {
+      const { data, status } = await axios.get(`${url}/test`);
+
+      if (status === 200) {
+        setUserData(data);
+        setCallStatus("suceess");
+        setMsg(`서버에서 정상적으로 응답함`);
+      }
+    } catch(error: any) {
+      console.log(error.message)
+      setCallStatus("failed");
+      setMsg(`서버 통신 실패`);
+    };
+  };
+```
+    
+
+프론트에서의 결과는 아래와 같다.  
+    
+<img src="./public/fetch-result.png" alt="" />
+
+***
 
 ### 📆 May 18, 2024
 헤더의 공통 네비게이션에서 현재 메뉴의 활성화 스타일 적용  
@@ -75,7 +114,7 @@ const pathname = usePathname();
 
 ***  
 
-
+ 
 ### 📆 May 16, 2024
 #### Next.js App Router
 Next.js 13 부터 app/ 디렉토리를 기반으로 라우팅이 구성된다.  
