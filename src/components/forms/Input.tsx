@@ -20,9 +20,11 @@ export interface InputProps {
     onkeydown?: (e: KeyboardEvent<HTMLInputElement>) => void,
 }
 
-export default function Input({
-    inputId, name, type, placeholder, readonly, disabled, invalid, value, defaultValue, useref, maxlength, onchange, onblur, onfocus, onkeyup, onkeydown
-} : InputProps) {
+export default function Input(props: InputProps) {
+    const {
+        inputId, name, type, placeholder, readonly, disabled, invalid, value, defaultValue, useref, maxlength, onchange, onblur, onfocus, onkeyup, onkeydown
+    } = props;
+
     return (
         <>
             <InputTypeText

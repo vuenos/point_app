@@ -1,6 +1,7 @@
 "use client";
 
 import Input from "@/components/forms/Input";
+import InputGroup from "@/components/forms/InputGroup";
 
 export default function Join() {
     return (
@@ -9,12 +10,12 @@ export default function Join() {
 
             <div>
                 <form>
-                    <div>
-                        <label htmlFor="userId">Email</label>
-                        <Input
-                            inputId="userId"
-                        />
-                    </div>
+                    <InputGroup 
+                        inputId="userEMail"
+                        label="이메일"
+                        required={true}
+                        placeholder="Input email"
+                    />
                 </form>
             </div>
         </>
