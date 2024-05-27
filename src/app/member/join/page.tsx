@@ -11,10 +11,29 @@ export default function Join() {
             <div>
                 <form>
                     <InputGroup 
-                        inputId="userEMail"
+                        inputId="userEmail"
+                        type="email"
                         label="이메일"
+                        title="Email"
                         required={true}
-                        placeholder="Input email"
+                        placeholder="Email"
+                        className="input-text"
+                    />
+
+                    <InputGroup 
+                        inputId="userPassword"
+                        type="password"
+                        label="비밀번호"
+                        title="Password"
+                        required={true}
+                        placeholder="Passwod"
+                        className="input-text"
+                    />
+
+                    <Input
+                        type="submit"
+                        value="Submit"
+                        className="input-button submit"
                     />
                 </form>
             </div>

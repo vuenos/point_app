@@ -13,6 +13,7 @@ export interface InputProps {
     defaultValue?: string,
     maxlength?: number,
     useref?: LegacyRef<HTMLInputElement>,
+    className?: string,
     onchange?: (e: ChangeEvent<HTMLInputElement>) => void,
     onblur?: (e: FocusEvent<HTMLInputElement>) => void,
     onfocus?: (e: FocusEvent<HTMLInputElement>) => void,
@@ -22,7 +23,7 @@ export interface InputProps {
 
 export default function Input(props: InputProps) {
     const {
-        inputId, name, type, placeholder, readonly, disabled, invalid, value, defaultValue, useref, maxlength, onchange, onblur, onfocus, onkeyup, onkeydown
+        inputId, name, type, placeholder, readonly, disabled, invalid, value, defaultValue, useref, maxlength, className, onchange, onblur, onfocus, onkeyup, onkeydown
     } = props;
 
     return (
@@ -30,7 +31,7 @@ export default function Input(props: InputProps) {
             <InputTypeText
                 id={inputId}
                 name={name}
-                className={invalid ? "invalid" : null}
+                className={className}
                 type={type || "text"}
                 placeholder={placeholder}
                 readOnly={readonly}
@@ -43,7 +44,7 @@ export default function Input(props: InputProps) {
                 onBlur={onblur}
                 onFocus={onfocus}
                 onKeyUp={onkeyup}
-                onKeyDown={onkeydown}           
+                onKeyDown={onkeydown}    
             />
         </>
     )

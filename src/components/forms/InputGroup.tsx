@@ -4,15 +4,15 @@ import Input, { InputProps } from "./Input";
 export interface InputGroupProps extends InputProps {
    children?: ReactNode,
    label?: string,
+   title?: string,
    required?: boolean,
-   className?: "invalid",
    guide?: string | Array<string> | Array<ReactNode>,
    invalidText?: string
 }
 
 export default function InputGroup(props: InputGroupProps) {
     const {
-        inputId, name, label, required, type="text", className, placeholder, readonly, disabled, value, maxlength, defaultValue, guide, invalidText, children, useref, onchange, onblur, onfocus, onkeyup, onkeydown
+        inputId, name, label, title, required, type="text", className, placeholder, readonly, disabled, value, maxlength, defaultValue, guide, invalidText, children, useref, onchange, onblur, onfocus, onkeyup, onkeydown
     } = props;
 
     return (
@@ -21,7 +21,7 @@ export default function InputGroup(props: InputGroupProps) {
         >
             {label && 
                 <label>
-                    {label} {required && <span>*</span>}
+                    {title} {required && <span>*</span>}
                 </label>
             }
 
@@ -43,6 +43,7 @@ export default function InputGroup(props: InputGroupProps) {
                     onkeyup={onkeyup}
                     onkeydown={onkeydown}
                     maxlength={maxlength}
+                    className={className}
                 />
             }
 
