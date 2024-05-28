@@ -19,9 +19,57 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 May 28, 2024
+MongDB에 연결하고 데이터를 POST, GET 하는 테스트 코드.  
+- API route 의 기본코드
+```javascript
+const { MongoClient, ServerApiVersion } = require("mongodb");
+
+// Replace the placeholder with your Atlas connection string
+const uri = "<connection string>";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri,  {
+        serverApi: {
+            version: ServerApiVersion.v1,
+            strict: true,
+            deprecationErrors: true,
+        }
+    }
+);
+
+async function run() {
+  try {
+    // Connect the client to the server (optional starting in v4.7)
+    await client.connect();
+
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
+```
+[참고]  
+- https://www.mongodb.com/ko-kr/docs/atlas/device-sdks/web/nextjs/
+- https://www.mongodb.com/docs/drivers/node/current/fundamentals/connection/connect/#std-label-node-connect-to-mongodb
+- https://ellertsmarik.medium.com/json-api-using-next-js-13-and-mongodb-f45e8e61b031
+
+### 📆 May 22, 2024
+#### MongoDB 세팅
+DB는 몽고디비를 사용하기로 했다.  
+등록, 조회 의 기능이 대부분이라 무리 없어 보였다.  
+db,collection을 생성
+<img src="./public/mg-db-test.png" alt="" /> 
+
+
 ### 📆 May 20, 2024
-Express 로 백엔드를 구성했을때 이슈가 생겼다.  
-프론트와 별개로 서버호스팅을 구성해야 하는 것이다  
+Express 로 백엔드를 구성.했을때  
+프론트와 별개로 서버호스팅을 구성해야 한다  
 vercel 로 deploy 하여 production 상태로 만들어서 온라인으로 접속해 보면 프론트는 정상적으로 보이지만  
 API 를 호출했을때 통신이 되지 않는다. 백엔드 리소스를 별도로 호스팅 하여 호출해야 하는 것이다.  
 - Next.js 로 개발하는데 Express 로 백엔드를 별도로 구성하기 보다 Next.js 의 [Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers) 로 endpoint 를 만들면 되겠다는 생각이 들었다.
