@@ -9,10 +9,10 @@ import connect from "@/utils/connectMongDB";
 
 export async function POST(request: Request){
     const client = await connect;
-    const cursor = await client.db("test").collection("users").insertOne({
-        email:"vuenos@naver.com",
+    const register = await client.db("test").collection("users").insertOne({
+        email:"jintae.email@google.com",
         name: "Jintae Kim",
-        Age: "25"
+        Age: "32"
     });
     return Response.json({message: "successfully updated the document"})
-  }
+}

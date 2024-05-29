@@ -54,6 +54,48 @@ async function run() {
 run().catch(console.dir);
 
 ```
+  
+db에 접속한 후 데이터를 보내는 테스트 페이지를 추가.  
+```javascript
+// api/users/regist/route.ts
+// /api/users/regist entpoint가 생성됨
+
+export async function POST(request: Request){
+    const client = await connect;
+    const cursor = await client.db("test").collection("users").insertOne({
+        email:"vuenos@gmail.com",
+        name: "Jintae Kim",
+        Age: "22"
+    });
+    return Response.json({message: "successfully updated the document"})
+}
+
+// app/test/page.tsx
+export default function TestApi() {
+    useEffect(() => {
+        fetch("/api/users/regist", {
+            method: "POST"
+        })
+    }, []);
+
+    return (
+        <h1>Some Content</h1>
+    )
+}
+```
+
+이러면 http://localhost:3000/test 접속시  
+MongoDB 의 'test' db 의 'users' collection 에 email, name, age 데이터를 저장함.
+
+- ```insertOne``` : 단일 document 를 collection 에 저장
+- ```insertMany``` : 다중 document 를 collection 에 저장  
+
+[참고] https://www.mongodb.com/ko-kr/docs/manual/reference/method/db.collection.insertOne/
+
+
+[결과]
+<img src="./public/mongo-db-users.png" alt="" />
+
 [참고]  
 - https://www.mongodb.com/ko-kr/docs/atlas/device-sdks/web/nextjs/
 - https://www.mongodb.com/docs/drivers/node/current/fundamentals/connection/connect/#std-label-node-connect-to-mongodb
