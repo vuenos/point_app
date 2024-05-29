@@ -14,6 +14,7 @@ export default function Header() {
         { id: "menu01", title: `${userName}`, path: "/member/mypage" },
         { id: "menu02", title: "Login", path: "/member/login" },
         { id: "menu03", title: "Sign up", path: "/member/join" },
+        { id: "menu04", title: "Users", path: "/member/users" },
     ];
 
     return (
