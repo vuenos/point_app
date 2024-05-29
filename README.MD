@@ -19,7 +19,74 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 May 29, 2024
+
+DB 저장 이벤트 핸들러 추가  
+Backend 에서 유저데이터 email, name 을 users collection 에 저장할 수 있는 이벤트 핸들러를 추가한다.  
+Front 화면에는 email, name 데이터를 보낼 수 있는 form 을 만든다. (신규유저 등록을 위해서는 password 도 필요하다. password 는 암호화 로직도 필요) 
+Front 에서는 유저데이터를 /api/users/regist api 를 호출하여 db에 저장하게 된다.
+```javascript
+// app/api/users/regist/route.ts
+export async function POST(request: Request) {
+    const client = await connect;
+    const body = await request.json();
+    await client.db("test").collection("users").insertOne({
+        email: body.userEmail,
+        name: body.userName,
+    });
+    return Response.json({
+        message: "successfully updated the document"
+    })
+}
+
+// app/member/join/page.tsx
+const submitHandler = () => {
+    fetch("/api/users/regist", {
+        method: "POST",
+        body: JSON.stringify({
+            userEmail, 
+            userName, 
+            userPassword
+        })
+    })
+}
+
+// <InputGroup> 은 input 과 label 등으로 구성된 컴포넌트 
+<form onSubmit={submitHandler}>
+    <InputGroup 
+        inputId="userEmail"
+        type="email"
+        title="Email"
+        required={true}
+        value={userEmail}
+        placeholder="Email"
+        onchange={(e) => setUserEmail(e.target.value)}
+    />
+    <InputGroup 
+        inputId="userName"
+        type="text"
+        title="Name"
+        required={true}
+        value={userName}
+        placeholder="Name"
+        onchange={(e) => setUserName(e.target.value)}
+    />
+
+    <Input
+        type="submit"
+        value="Submit"
+    />
+</form>
+```
+[입력화면]  
+<img src="./public/form1.png" width="320" alt="" />
+
+[Form 전송결과]  
+<img src="./public/mongo-db-users2.png" alt="" />
+
+
 ### 📆 May 28, 2024
+
 MongDB에 연결하고 데이터를 POST, GET 하는 테스트 코드.  
 - API route 의 기본코드
 ```javascript

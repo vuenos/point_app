@@ -12,7 +12,11 @@ export default function Join() {
     const submitHandler = () => {
         fetch("/api/users/regist", {
             method: "POST",
-            body: JSON.stringify({userEmail, userName, userPassword})
+            body: JSON.stringify({
+                userEmail, 
+                userName, 
+                userPassword
+            })
         })
     }
 
