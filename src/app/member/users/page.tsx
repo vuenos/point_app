@@ -36,7 +36,7 @@ export default function GetUsers () {
             <ul>
                 {users && users.map((user) => (
                     <li key={user._id}>
-                        {user.email} / {user.name}
+                        {user.name}({user.email})
                     </li>
                 ))}
             </ul>

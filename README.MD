@@ -21,6 +21,58 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### 📆 May 29, 2024
 
+저장된 유저들 정보 가져오기  
+users collection 에 저장된 저들의 데이터(document)를 front 화면에서 호출하기  
+- app/api/users/route.ts 에 유저데이터를 호출하는 콘트롤러를 만들어 /api/users API endpoint 생성
+```javascript
+// app/api/users/route.ts
+// /api/users
+export async function GET(req: NextRequest) {
+    const client = await connect;
+    const usersData = await client.db("test").collection("users").find();
+    const getUsers = await usersData.toArray();
+
+    return NextResponse.json(getUsers);
+}
+
+// app/member/users/page.tsx
+// /member/users
+const [users, setUsers] = useState([]);
+
+const getUsersHandler = async () => {
+    try {
+        const { data, status } = await axios.get("/api/users/");
+        if (status === 200) {
+            setUsers(data);
+        }
+    } catch(error) {
+        console.log(error.message);
+    }
+    
+}
+
+useEffect(() => {
+    getUsersHandler();
+}, []);
+
+return (
+    <>
+        <ul>
+            {users && users.map((user) => (
+                <li key={user._id}>
+                    {user.name}({user.email})
+                </li>
+            ))}
+        </ul>
+    </>
+)
+```
+[프론트 화면]  
+<img src="./public/users-front.png" alt="" />
+
+
+### 📆 May 29, 2024
+
 DB 저장 이벤트 핸들러 추가  
 Backend 에서 유저데이터 email, name 을 users collection 에 저장할 수 있는 이벤트 핸들러를 추가한다.  
 Front 화면에는 email, name 데이터를 보낼 수 있는 form 을 만든다. (신규유저 등록을 위해서는 password 도 필요하다. password 는 암호화 로직도 필요) 
