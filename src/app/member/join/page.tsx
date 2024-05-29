@@ -21,7 +21,7 @@ export default function Join() {
             <h2>Sign Up</h2>
 
             <div>
-                <form>
+                <form onSubmit={submitHandler}>
                     <InputGroup 
                         inputId="userEmail"
                         type="email"
@@ -45,7 +45,7 @@ export default function Join() {
                         onchange={(e) => setUserName(e.target.value)}
                     />
 
-                    <InputGroup 
+                    {/* <InputGroup 
                         inputId="userPassword"
                         type="password"
                         label="비밀번호"
@@ -55,7 +55,7 @@ export default function Join() {
                         placeholder="Passwod"
                         className="input-text"
                         onchange={(e) => setUserPassword(e.target.value)}
-                    />
+                    /> */}
 
                     <Input
                         type="submit"
