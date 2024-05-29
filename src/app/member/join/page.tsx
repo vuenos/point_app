@@ -3,21 +3,41 @@
 import { useState } from "react";
 import Input from "@/components/forms/Input";
 import InputGroup from "@/components/forms/InputGroup";
+import axios from "axios";
 
 export default function Join() {
     const [userEmail, setUserEmail] = useState<string>("");
     const [userName, setUserName] = useState<string>("");
     const [userPassword, setUserPassword] = useState<string>("");
 
-    const submitHandler = () => {
-        fetch("/api/users/regist", {
-            method: "POST",
-            body: JSON.stringify({
-                userEmail, 
-                userName, 
-                userPassword
-            })
-        })
+    const userInput = {
+        userEmail: userEmail,
+        userName: userName,
+    }
+
+    const submitHandler = async () => {
+        try {
+            const { data, status } = await axios.post("/api/users/regist", userInput, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (status === 200) {
+                console.log("Success insert data in Users Collection");
+                console.log(data);
+            }
+        } catch (error) {
+            console.log(error.message())
+        }
+        // fetch("/api/users/regist", {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //         userEmail,
+        //         userName,
+        //         userPassword
+        //     })
+        // })
     }
 
     return (

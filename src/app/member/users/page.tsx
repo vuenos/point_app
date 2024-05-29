@@ -35,7 +35,7 @@ export default function GetUsers () {
         <>
             <ul>
                 {users && users.map((user) => (
-                    <li key={user._id}>
+                    <li key={user._id.toString()}>
                         {user.name}({user.email})
                     </li>
                 ))}
