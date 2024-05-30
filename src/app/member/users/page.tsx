@@ -14,12 +14,12 @@ export default function GetUsers () {
 
     const getUsersHandler = async () => {
         try {
-            const { data, status } = await axios.get("/api/users/");
-            // const data: Users[] = await respnose.json();
+            const res = await axios.get("/api/users/");
+            // const data: Users[] = await res.json();
             
-            if (status === 200) {
-                setUsers(data);
-                console.log(`USER_DATA::: ${data} ${JSON.stringify(data)}`);
+            if (res.status === 200) {
+                setUsers(res.data);
+                console.log(`USER_DATA::: ${res.data} ${JSON.stringify(res.data)}`);
             }
         } catch(error) {
             console.log(error.message);

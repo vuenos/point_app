@@ -33,12 +33,16 @@ export default function Join() {
         }
         // fetch("/api/users/regist", {
         //     method: "POST",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
         //     body: JSON.stringify({
         //         userEmail,
         //         userName,
         //         userPassword
         //     })
         // })
+        // const data = await res.json();
     }
 
     return (
@@ -77,7 +81,7 @@ export default function Join() {
                         title="Password"
                         required={true}
                         value={userPassword}
-                        placeholder="Passwod"
+                        placeholder="Password"
                         className="input-text"
                         onchange={(e) => setUserPassword(e.target.value)}
                     /> */}
