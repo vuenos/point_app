@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import axios from "axios";
-import Loader from "@/components/common/Loader";
+import Loading from "./loading";
 
 type Users = {
     userEmail: string,
@@ -12,16 +12,15 @@ type Users = {
 
 export default function GetUsers () {
     const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(false);
 
     const getUsersHandler = async () => {
-        setLoading(true);
         try {
             const { data, status } = await axios.get("/api/users/");
             // const data: Users[] = await respnose.json();
             if (status === 200) {
-                setLoading(false);
-                setUsers(data);
+                setTimeout(() => {
+                    setUsers(data);
+                }, 2000)
                 console.log(`USER_DATA::: ${data}`);
             }
         } catch(error) {
@@ -37,23 +36,18 @@ export default function GetUsers () {
 
     return (
         <>
-            {loading ? (
-                <Loader />
-            ) : (
-                <>
-                    {users ?
-                        <ul>
-                            {users && users.map((user) => (
-                                <li key={user._id.toString()}>
-                                    {user.name}({user.email})
-                                </li>
-                            ))}
-                        </ul>
-                        : <div>No data</div>
-                    }
-                </>
-            )}
-            
+            <Suspense fallback={<Loading />}>
+                {users ?
+                    <ul>
+                        {users && users.map((user) => (
+                            <li key={user._id.toString()}>
+                                {user.name}({user.email})
+                            </li>
+                        ))}
+                    </ul>
+                    : <div>No data</div>
+                }
+            </Suspense>            
         </>
     )
 }
