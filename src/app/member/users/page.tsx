@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Loading from "./loading";
 
@@ -12,17 +12,21 @@ type Users = {
 
 export default function GetUsers () {
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const getUsersHandler = async () => {
+        
+        setLoading(true);
         try {
             const { data, status } = await axios.get("/api/users/");
             // const data: Users[] = await respnose.json();
-            if (status === 200) {
-                setTimeout(() => {
+            setTimeout(() => {
+                if (status === 200) {
                     setUsers(data);
-                }, 2000)
-                console.log(`USER_DATA::: ${data}`);
-            }
+                    console.log(`USER_DATA::: ${data}`);
+                }                
+                setLoading(false);
+            }, 1500);
         } catch(error) {
             console.log(error.message);
         }
@@ -36,18 +40,17 @@ export default function GetUsers () {
 
     return (
         <>
-            <Suspense fallback={<Loading />}>
-                {users ?
-                    <ul>
-                        {users && users.map((user) => (
-                            <li key={user._id.toString()}>
-                                {user.name}({user.email})
-                            </li>
-                        ))}
-                    </ul>
-                    : <div>No data</div>
-                }
-            </Suspense>            
+            {loading && <Loading />}
+            {users ?
+                <ul>
+                    {users && users.map((user) => (
+                        <li key={user._id.toString()}>
+                            {user.name}({user.email})
+                        </li>
+                    ))}
+                </ul>
+                : <div>No data</div>
+            }            
         </>
     )
 }
