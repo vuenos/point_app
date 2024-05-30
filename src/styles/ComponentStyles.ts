@@ -35,7 +35,23 @@ const ButtonBackToPage = styled.button`
     }
 `;
 
+const Loader = styled.div`
+    position: fixed;
+    top: calc(50% - 60px);
+    left: calc(50% - 80px);
+    width: 160px;
+    height: 120px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    border-color: #cccccc;
+    color: #727272;
+`;
+
 export {
     ButtonPrimary,
     ButtonBackToPage,
+    Loader,
 }
