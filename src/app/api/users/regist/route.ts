@@ -23,6 +23,7 @@ export async function POST(request: Request) {
     await client.db("test").collection("users").insertOne({
         email: body.userEmail,
         name: body.userName,
+        password: body.userPassword,
     });
     return Response.json({message: "successfully updated the document"})
 }

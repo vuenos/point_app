@@ -15,18 +15,18 @@ export default function GetUsers () {
     const [loading, setLoading] = useState<boolean>(false);
 
     const getUsersHandler = async () => {
-        
         setLoading(true);
         try {
             const { data, status } = await axios.get("/api/users/");
             // const data: Users[] = await respnose.json();
-            setTimeout(() => {
-                if (status === 200) {
+            
+            if (status === 200) {
+                setTimeout(() => {                    
+                    setLoading(false);
                     setUsers(data);
-                    console.log(`USER_DATA::: ${data}`);
-                }                
-                setLoading(false);
-            }, 1500);
+                }, 1500);
+                console.log(`USER_DATA::: ${data}`);
+            }
         } catch(error) {
             console.log(error.message);
         }
@@ -40,17 +40,17 @@ export default function GetUsers () {
 
     return (
         <>
-            {loading && <Loading />}
-            {users ?
-                <ul>
-                    {users && users.map((user) => (
-                        <li key={user._id.toString()}>
-                            {user.name}({user.email})
-                        </li>
-                    ))}
-                </ul>
+            {loading ? (<Loading />) : (
+                (users.length >= 1) ?
+                    <ul>
+                        {users.map((user) => (
+                            <li key={user._id.toString()}>
+                                {user.name}({user.email})
+                            </li>
+                        ))}
+                    </ul>
                 : <div>No data</div>
-            }            
+            )} 
         </>
     )
 }

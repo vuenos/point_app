@@ -11,8 +11,9 @@ export default function Join() {
     const [userPassword, setUserPassword] = useState<string>("");
 
     const userInput = {
-        userEmail: userEmail,
-        userName: userName,
+        userEmail,
+        userName,
+        userPassword,
     }
 
     const submitHandler = async () => {
