@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Loading from "@/app/loading";
 
 type Users = {
     userEmail: string,
@@ -11,6 +12,8 @@ type Users = {
 
 export default function GetUsers () {
     const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState(null);
 
     const getUsersHandler = async () => {
         try {
@@ -19,9 +22,12 @@ export default function GetUsers () {
             
             if (res.status === 200) {
                 setUsers(res.data);
+                setLoading(false);
                 console.log(`USER_DATA::: ${res.data} ${JSON.stringify(res.data)}`);
             }
         } catch(error) {
+            setError(true);            
+            setLoading(false);
             console.log(error.message);
         }
         
@@ -30,11 +36,15 @@ export default function GetUsers () {
     useEffect(() => {
         getUsersHandler();
         console.log(`USERS::: ${JSON.stringify(users)}`)
-    }, [])
+    }, []);
+    
+
+    if (loading) return <Loading />;
+    if (error) return <div>Error: {error.message}</div>;
 
     return (
         <>
-            {(users.length >= 1) ?
+            {(users.length > 0) ?
                 <ul>
                     {users.map((user) => (
                         <li key={user._id.toString()}>
