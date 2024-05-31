@@ -19,6 +19,19 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 May 30, 2024
+#### UI loading
+Nextjs App Router 에서는 약속된 파일 중(layout, page, route 등등) 하나인 loading.ts 라는 파일이 있다. 이는 페이지간 이동 시 렌더링이 되는 동안 대체되는 ui 를 보여줄 수 있다.  
+컴포넌트별로도 적용할 수 있다.  
+layout.tsx와 page.tsx 와 같은 경로에 만들어 두면 해당 layout.tsx 로 랩핑되어 있는 화면 및 컴포넌트는 모두 자동 적용된다.  
+<img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Floading-special-file.png&w=1920&q=75" width="480" alt="loading.js" />  
+```Suspense``` 를 통해 컴포넌트 별로 로딩 UI를 수동 설정할 수 있다.  
+
+<img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Floading-overview.png&w=1920&q=75" alt="Suspense" />  
+  
+
+
+
 ### 📆 May 29, 2024
 
 저장된 유저들 정보 가져오기  

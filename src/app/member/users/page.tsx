@@ -59,7 +59,10 @@ export default function GetUsers () {
                         </li>
                     ))}
                 </ul>
-            : <div>No data</div>
+            : 
+                <CalloutBox className="error">
+                    <h4 className="title">No data result</h4>
+                </CalloutBox>
             }
         </>
     )

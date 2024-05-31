@@ -24,7 +24,7 @@ export default function Header() {
                 : 
                 <HeaderSection>
                     <h1>
-                        <Link href="/">App</Link>
+                        <Link href="/" scroll={false}>App</Link>
                     </h1>
         
                     <nav>
@@ -33,6 +33,7 @@ export default function Header() {
                                 key={menuItem.id}
                                 href={menuItem.path}
                                 className={`${menuItem.path === pathname ? "active" : ""}`}
+                                scroll={false}
                             >
                                 {menuItem.title}
                             </Link>

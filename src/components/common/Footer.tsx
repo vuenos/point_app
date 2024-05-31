@@ -10,8 +10,8 @@ export default function Footer() {
             </div>
 
             <nav>
-                <Link href="/agreement">Agreement</Link>
-                <Link href="/privacy">privacy</Link>
+                <Link href="/agreement" scroll={false}>Agreement</Link>
+                <Link href="/privacy" scroll={false}>privacy</Link>
             </nav>
         </FooterSection>
     );
