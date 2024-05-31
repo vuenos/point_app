@@ -50,8 +50,38 @@ const Loader = styled.div`
     color: #727272;
 `;
 
+const CalloutBox = styled.div`
+    width: 100%;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    border-radius: 4px;
+    box-shadow: none;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    padding: 6px 16px;
+    color: rgb(1, 67, 97);
+    background-color: rgb(229, 246, 253);
+
+        .title {
+            margin: -2px 0px 0.35em;
+            font-family: Roboto, Helvetica, Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            letter-spacing: 0.00938em;
+            font-weight: 700;
+        }
+
+        &.error {
+            color: rgb(95, 33, 32);
+            background-color: rgb(253, 237, 237);
+        }
+`;
+
 export {
     ButtonPrimary,
     ButtonBackToPage,
     Loader,
+    CalloutBox,
 }
