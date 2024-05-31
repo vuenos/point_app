@@ -27,8 +27,45 @@ layout.tsx와 page.tsx 와 같은 경로에 만들어 두면 해당 layout.tsx �
 <img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Floading-special-file.png&w=1920&q=75" width="480" alt="loading.js" />  
 ```Suspense``` 를 통해 컴포넌트 별로 로딩 UI를 수동 설정할 수 있다.  
 
-<img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Floading-overview.png&w=1920&q=75" alt="Suspense" />  
+<img src="https://nextjs.org/_next/image?url=%2Fdocs%2Flight%2Floading-overview.png&w=1920&q=75" width="480" alt="Suspense" />  
   
+- loading.tsx 파일을 최상단의 page.tsx 와 같은 경로에 두어 공통 로딩 UI로 적용함. 페이지간 이동시에 적용되는 것이 확인됨. (프로젝트 초기 단계라 페이지 렌더링이 빨라서 인지 거의 보이지 않음)
+- ```<Suspense><Component /></Suspense>``` 사용해 보았으나 적용이 안되는거 같음... 이유는 확실히 모르겠다. react developer tools 로 마운트 된 components 를 보면 ```<Suspense>```가 존재함. 
+- loading.tsc 를 사용해서 데이터 패치 상태에 따른 로직을 구현.
+```TypeScript
+// loading 상태 추가
+const [loading, setLoading] = useState<boolean>(true);
+
+const getUsersHandler = async () => {
+    try {
+        const res = await axios.get("/api/users/");
+        
+        if (res.status === 200) {
+            setUsers(res.data);
+            setLoading(false); // data 가 성공적으로 패치되면 로딩 감춤
+        }
+    } catch(error) {
+        setError(true);            
+        setLoading(false);
+        setErrMsg(
+            error.reponse && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        );
+        console.log(error.message);
+    }
+    
+}
+
+ if (loading) return <Loading />;
+
+ return (
+    <>
+        ... 
+    </>
+ )
+
+```
 
 
 

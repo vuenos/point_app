@@ -8,11 +8,11 @@ export default function StandAloneHeader () {
     return (
         <StandAloenHeaderSection>
             <h1>
-                <Link href="/">App</Link>
+                <Link href="/" scroll={false}>App</Link>
             </h1>
 
             <nav>
-                <Link href="/member/join">Sign Up</Link>
+                <Link href="/member/join" scroll={false}>Sign Up</Link>
             </nav>
         </StandAloenHeaderSection>
     )

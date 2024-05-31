@@ -74,17 +74,17 @@ export default function Join() {
                         onchange={(e) => setUserName(e.target.value)}
                     />
 
-                    {/* <InputGroup 
+                    <InputGroup 
                         inputId="userPassword"
                         type="password"
-                        label="비밀번호"
+                        label="Password"
                         title="Password"
                         required={true}
                         value={userPassword}
                         placeholder="Password"
                         className="input-text"
                         onchange={(e) => setUserPassword(e.target.value)}
-                    /> */}
+                    />
 
                     <Input
                         type="submit"
