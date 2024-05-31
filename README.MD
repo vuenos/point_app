@@ -19,6 +19,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 May 31, 2024
+
+#### 인증 로직 구현
+- bcrypt, jsonwebtoken 패키지로 유저등록시 보내는 데이터를 암호화하고 웹토큰을 만들어서 유저의 데이터를 검증하고 인증할 것 이다.
+
 ### 📆 May 30, 2024
 #### UI loading
 Nextjs App Router 에서는 약속된 파일 중(layout, page, route 등등) 하나인 loading.ts 라는 파일이 있다. 이는 페이지간 이동 시 렌더링이 되는 동안 대체되는 ui 를 보여줄 수 있다.  
