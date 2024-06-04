@@ -3,22 +3,24 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Input from "@/components/forms/Input";
+import { ButtonPrimary } from "@/styles/ComponentStyles";
 import InputGroup from "@/components/forms/InputGroup";
 import axios from "axios";
 
 export default function Join() {
     const router = useRouter();
-    const [userEmail, setUserEmail] = useState<string>("");
-    const [userName, setUserName] = useState<string>("");
-    const [userPassword, setUserPassword] = useState<string>("");
+    const [email, setEmail] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
 
     const userInput = {
-        userEmail,
-        userName,
-        userPassword,
+        email,
+        name,
+        password,
     }
 
-    const submitHandler = async () => {
+    const submitHandler = async (event) => {
+        event.preventDefault();
         try {
             const { data, status } = await axios.post("/api/users/regist", userInput, {
                 headers: {
@@ -29,10 +31,10 @@ export default function Join() {
             if (status === 200) {
                 console.log("Success insert data in Users Collection");
                 console.log(data);
-                router.push("/member/login")
+                // router.push("/member/login")
             }
         } catch (error) {
-            console.log(error.message())
+            console.log(error.message)
         }
         // fetch("/api/users/regist", {
         //     method: "POST",
@@ -55,38 +57,38 @@ export default function Join() {
             <div>
                 <form onSubmit={submitHandler}>
                     <InputGroup 
-                        inputId="userEmail"
+                        inputId="email"
                         type="email"
                         label="이메일"
                         title="Email"
                         required={true}
-                        value={userEmail}
+                        value={email}
                         placeholder="Email"
                         className="input-text"
-                        onchange={(e) => setUserEmail(e.target.value)}
+                        onchange={(e) => setEmail(e.target.value)}
                     />
                     <InputGroup 
-                        inputId="userName"
+                        inputId="name"
                         type="text"
                         label="Name"
                         title="Name"
                         required={true}
-                        value={userName}
+                        value={name}
                         placeholder="Name"
                         className="input-text"
-                        onchange={(e) => setUserName(e.target.value)}
+                        onchange={(e) => setName(e.target.value)}
                     />
 
                     <InputGroup 
-                        inputId="userPassword"
+                        inputId="password"
                         type="password"
                         label="Password"
                         title="Password"
                         required={true}
-                        value={userPassword}
+                        value={password}
                         placeholder="Password"
                         className="input-text"
-                        onchange={(e) => setUserPassword(e.target.value)}
+                        onchange={(e) => setPassword(e.target.value)}
                     />
 
                     <Input
