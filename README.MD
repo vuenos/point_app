@@ -19,6 +19,98 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 June 4, 2024
+#### 사용자 등록 로직
+- 사용자 등록을 위한 로직을 구현한다. 프론트에서 입력받은 데이터를 백엔드로 보내고 백엔드에서는 해당 데이터의 모델을 통해 검증한 후 db에 접속 -> 저장하게 된다.  
+
+#### Backend
+- TODO: 사용자 이메일 중복체크, 데이터 모델 정의가 필요하다. 
+- bcrypt로 password를 암호화 했다.
+
+```javascript
+export async function POST(request: NextRequest) {
+    try {
+        const client = await connect;
+        const body = await request.json();
+        
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(body.password, salt);
+
+        await client.db("test").collection("users").insertOne({
+            name: body.name,
+            email: body.email,
+            password: hashedPassword
+        });
+        
+        return NextResponse.json({
+            message: "successfully updated the document",
+            success: true,
+        })
+    } catch (error: any) {
+        return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+}
+```
+  
+#### Frontend
+- onSubmit 이벤트로 폼을 전송하고, ```event.preventDefault()``` 로 폼이 무작정 전송되는걸 막는다.
+- 입력값 validator 필요함.
+- 인증 로직이 완성되면 인증여부에 따른 접근 여부 작업도 필요(Router).
+
+```javascript
+const [email, setEmail] = useState<string>("");
+const [name, setName] = useState<string>("");
+const [password, setPassword] = useState<string>("");
+
+const userInput = {
+    email,
+    name,
+    password,
+}
+
+const submitHandler = async (event) => {
+    event.preventDefault();
+    try {
+        const { data, status } = await axios.post("/api/users/regist", userInput, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (status === 200) {
+            router.push("/member/login")
+        }
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+<form onSubmit={submitHandler}>
+    <InputGroup 
+        inputId="email"
+        type="email"
+        label="이메일"
+        title="Email"
+        required={true}
+        value={email}
+        placeholder="Email"
+        className="input-text"
+        onchange={(e) => setEmail(e.target.value)}
+    />
+    .
+    .
+    .
+    <Input
+        type="submit"
+        value="Submit"
+        className="input-button submit"
+    />
+</form>
+```
+
+일단 등록은 정상적으로 된다. 
+
+
 ### 📆 May 31, 2024
 
 #### 인증 로직 구현
