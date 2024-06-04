@@ -31,7 +31,7 @@ export default function Join() {
             if (status === 200) {
                 console.log("Success insert data in Users Collection");
                 console.log(data);
-                // router.push("/member/login")
+                router.push("/member/login")
             }
         } catch (error) {
             console.log(error.message)
