@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Input from "@/components/forms/Input";
 import InputGroup from "@/components/forms/InputGroup";
 import axios from "axios";
 
 export default function Join() {
+    const router = useRouter();
     const [userEmail, setUserEmail] = useState<string>("");
     const [userName, setUserName] = useState<string>("");
     const [userPassword, setUserPassword] = useState<string>("");
@@ -27,6 +29,7 @@ export default function Join() {
             if (status === 200) {
                 console.log("Success insert data in Users Collection");
                 console.log(data);
+                router.push("/member/login")
             }
         } catch (error) {
             console.log(error.message())
