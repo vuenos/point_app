@@ -3,7 +3,7 @@ import { Noto_Sans_KR } from "next/font/google";
 import Header from "@/components/common/Header";
 import StandAloneHeader from "@/components/common/StandAloneHeader";
 import Footer from "@/components/common/Footer";
-import StyledComponentsRegistry from "@/lib/registry";
+import StyledComponentsRegistry from "@/libs/registry";
 import GlobalStyles from "@/styles/GlobalStyles";
 import Wrapper from "@/components/common/Wrapper";
 

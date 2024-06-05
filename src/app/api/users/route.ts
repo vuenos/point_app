@@ -1,8 +1,8 @@
 import {NextRequest, NextResponse} from "next/server";
-import connect from "@/utils/connectMongDB"
+import {connectDB} from "@/utils/connectMongDB"
 
 export async function GET(req: NextRequest) {
-    const client = await connect;
+    const client = await connectDB;
     const cursor = await client.db("test").collection("users").find();
     const getUsers = await cursor.toArray();
 

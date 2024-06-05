@@ -1,4 +1,4 @@
-import connect from "@/utils/connectMongDB";
+import {connectDB} from "@/utils/connectMongDB";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt"
@@ -22,7 +22,7 @@ import bcrypt from "bcrypt"
 
 export async function POST(request: NextRequest) {
     try {
-        const client = await connect;
+        const client = await connectDB;
         const body = await request.json();
 
         // const user = await User.findOne(body.email);
