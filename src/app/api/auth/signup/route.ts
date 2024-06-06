@@ -130,6 +130,7 @@ export async function DELETE(request: NextRequest) {
 
         const { userId } = await request.json();
 
+        // @ts-ignore
         const user = await User.findById(userId);
 
         if (!user) {
@@ -139,7 +140,7 @@ export async function DELETE(request: NextRequest) {
             )
         }
 
-        await user.remove();
+        await user.deleteOne();
 
         return NextResponse.json(
             { mesaage: "User deleted successfully" },

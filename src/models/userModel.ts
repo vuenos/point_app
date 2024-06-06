@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import {Schema, model, models, Model} from "mongoose";
 
 export interface UserDocument {
     email: string;
@@ -28,9 +28,9 @@ const UserSchema = new Schema<UserDocument>({
     },
     name: {
         type: String,
-        required: [true, "Fullname is required"],
-        minLength: [3, "fullname must be at least 3 characters"],
-        maxLength: [25, "fullname must be at most 25 characters"],
+        required: [true, "Full name is required"],
+        minLength: [3, "Full name must be at least 3 characters"],
+        maxLength: [25, "Full name must be at most 25 characters"],
     },
   },
   {
@@ -38,5 +38,5 @@ const UserSchema = new Schema<UserDocument>({
   }
 );
 
-const User = models.User || model<UserDocument>('User', UserSchema);
+const User =( models.User as Model<UserDocument>) || model<UserDocument>('User', UserSchema);
 export default User;
