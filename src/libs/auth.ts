@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
                 email: { label: "Email", type: "text", placeholder: "Email" },
                 password: { label: "Password", type: "password" },
             },
-            async authorize(credentials) {
+            async authorize(credentials, req): Promise<any> {
                 await connectDB();
                 const userFound = await User.findOne({
                     email: credentials?.email,
