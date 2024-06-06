@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { HeaderSection } from "@/styles/HeaderStyles";
@@ -11,42 +11,33 @@ import Loading from "@/app/loading";
 export default function Header() {
     const [userName, setUserName] = useState<string>("John Doe");
 
-    const { status } = useSession();
+    const { data: session, status } = useSession();
 
     const pathname = usePathname();
 
     const menuData = [
-        { id: "menu01", title: `${userName}`, path: "/member/mypage" },
+        { id: "menu01", title: `${session?.user?.name}`, path: "/member/mypage" },
         { id: "menu02", title: "Users", path: "/member/users" },
     ];
 
     const showSession = () => {
         if (status === "authenticated") {
-          return (
-            <button
-              type="button"
-              onClick={() => {
-                signOut();
-              }}
-            >
-              Logout
-            </button>
+            return (
+                <button
+                    type="button"
+                    onClick={() => {
+                        signOut();
+                    }}
+                >
+                    Logout
+                </button>
           )
         } else if (status === "loading") {
-          return (
-            <Loading />
-          )
+            return <Loading />
         } else {
-          return (
-            <Link
-              href="/member/login"
-              scroll={false}
-            >
-              Login
-            </Link>
-          )
+            return <Link href="/member/login" scroll={false}>Login</Link>
         }
-      }
+    }
 
     return (
         <>
