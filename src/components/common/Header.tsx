@@ -4,18 +4,49 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { HeaderSection } from "@/styles/HeaderStyles";
 import StandAloneHeader from "./StandAloneHeader";
+import { useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import Loading from "@/app/loading";
 
 export default function Header() {
     const [userName, setUserName] = useState<string>("John Doe");
+
+    const { status } = useSession();
 
     const pathname = usePathname();
 
     const menuData = [
         { id: "menu01", title: `${userName}`, path: "/member/mypage" },
-        { id: "menu02", title: "Login", path: "/member/login" },
-        { id: "menu03", title: "Sign up", path: "/member/join" },
-        { id: "menu04", title: "Users", path: "/member/users" },
+        { id: "menu02", title: "Users", path: "/member/users" },
     ];
+
+    const showSession = () => {
+        if (status === "authenticated") {
+          return (
+            <button
+              type="button"
+              onClick={() => {
+                signOut();
+              }}
+            >
+              Logout
+            </button>
+          )
+        } else if (status === "loading") {
+          return (
+            <Loading />
+          )
+        } else {
+          return (
+            <Link
+              href="/member/login"
+              scroll={false}
+            >
+              Login
+            </Link>
+          )
+        }
+      }
 
     return (
         <>
@@ -38,6 +69,8 @@ export default function Header() {
                                 {menuItem.title}
                             </Link>
                         ))}
+                        {!(status === "authenticated") && <Link href="/member/join"  scroll={false}>Sign Up</Link>}
+                        {showSession()}
                     </nav>
                 </HeaderSection>
             }

@@ -1,36 +1,20 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import mongoose from "mongoose";
 
-if (!process.env.MONGO_URI) {
-    throw new Error("Invalid/Missing enviroment variable: 'MONGO_URI'");
+const { MONGO_URI } = process.env;
+
+if (!MONGO_URI) {
+    throw new Error("MONGODB_URI must be defined");
 }
 
-const uri = process.env.MONGO_URI;
-const options = {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
+export const connectDB = async () => {
+    try {
+        const { connection } = await mongoose.connect(MONGO_URI);
+        if (connection.readyState === 1) {
+            console.log("MongoDB Connected");
+            return Promise.resolve(true);
+        }
+    } catch (error) {
+        console.error(error);
+        return Promise.reject(error);
     }
-}
-
-let client;
-let clientPromise: Promise<MongoClient>;
-
-if (process.env.NODE_ENV === "development") {
-    // development 모드에서는 HMR(Hot Module Replacement)로 인한 모듈 재로드 시 값이 유지되도록 전역 변수를 사용 합니다.
-    let globalWithMongo = global as typeof globalThis & {
-        _mongoClientPromise?: Promise<MongoClient>
-    }
-
-    if (!globalWithMongo._mongoClientPromise) {
-        client = new MongoClient(uri, options);
-        globalWithMongo._mongoClientPromise = client.connect();
-    }
-    clientPromise = globalWithMongo._mongoClientPromise;
-} else {
-    // Production 모드에서는 전역변수를 사용하지 않는 것이 좋다.
-    client = new MongoClient(uri, options);
-    clientPromise = client.connect();
-}
-
-export default clientPromise;
+};
