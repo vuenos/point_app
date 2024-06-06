@@ -19,6 +19,66 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 June 5, 2024
+#### NextAuth.js 구현과 오류 해결
+- 사용자인증을 [NextAuth.js](https://next-auth.js.org/getting-started/introduction) 로 적용하기로 함.
+- 공식사이트에서는 Next.js 을 위한 완전한 오픈 소스로 소개하고 있다.
+- 인증을 구현하는 resource 들이 잘정리되어 있는 느낌이다. [Get Started](https://next-auth.js.org/getting-started/example)
+
+### 시작하며
+- NextAuth.js 는 ```/api/auth``` path 안에서 인증을 처리한다.
+- /app/api/auth/[...nextauth]/route.ts 라우트를 만들어 GET, POST method 를 매핑하는 handler 를 만들어 준다.
+  
+```javascript
+// app/api/auth/[...nextauth]/route.ts
+import { authOptions } from "@/libs/auth";
+import NextAuth from "next-auth";
+
+const handler = NextAuth(authOptions);
+
+export {
+    handler as GET, handler as POST
+}
+```
+- 인증을 처리하는 auth.ts 를 작성한다. 나는 ```/app/lib/auth.ts``` 로 작성
+```javascript
+export const authOptions: NextAuthOptions = {
+    providers: [
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID as string,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+        }),
+        CredentialsProvider({
+            name: "Credentials",
+            id: "credentials",
+            credentials: {
+                email: { label: "Email", type: "text", placeholder: "Email" },
+                password: { label: "Password", type: "password" },
+            },
+            async authorize(credentials, req): Promise<any> {
+                await connectDB();
+                const userFound = await User.findOne({
+                    email: credentials?.email,
+                }).select("+password");
+
+                if (!userFound) throw new Error("Invalid Email");
+
+                const passwordMatch = await bcrypt.compare(
+                    credentials!.password,
+                    userFound.password,
+            );
+
+                if (!passwordMatch) throw new Error("Invalid Password");
+                return userFound;
+            },
+        }),
+    ],
+// 생략
+```
+- 기본적으로 email 과 비밀번호 인증을 제공한다. 구글 OAuth 도 제공한다.
+- 
+
+
 ### 📆 June 4, 2024
 #### 사용자 등록 로직
 - 사용자 등록을 위한 로직을 구현한다. 프론트에서 입력받은 데이터를 백엔드로 보내고 백엔드에서는 해당 데이터의 모델을 통해 검증한 후 db에 접속 -> 저장하게 된다.  
