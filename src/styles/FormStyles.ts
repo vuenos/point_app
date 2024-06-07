@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { ButtonPrimary, InputPasswordShow } from "@/styles/ComponentStyles";
-import { LinkStyle } from "@/styles/ComponentStyles";
+import { LinkStyle, OAuthCallButton } from "@/styles/ComponentStyles";
 
 const InputTypeText = styled.input`
     display: block;
@@ -91,9 +91,25 @@ const FormSection = styled.div`
     }
 `;
 
+const OAuthSection = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+    .title {
+        font-size: 13px;
+        color: #828282;
+    }
+    
+    ${OAuthCallButton} {
+        margin-left: 12px;
+    }
+`;
+
 export {
     InputTypeText,
     FormSection,
     InputWithOption,
-    InputWithLabel
+    InputWithLabel,
+    OAuthSection
 }
