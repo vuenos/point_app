@@ -32,11 +32,11 @@ const Signin = () => {
 
     if (res?.error) {
       setError(res.error as string)
-    };
+    }
 
     if (!res?.error) {
       return router.push("/")
-    };
+    }
   };
 
   return (
