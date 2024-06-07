@@ -8,8 +8,12 @@ import { useSession } from 'next-auth/react';
 import { BiLogoGoogle } from 'react-icons/bi';
 import { BiSolidShow } from 'react-icons/bi';
 import { BiSolidHide } from 'react-icons/bi';
+import { CalloutBox, ButtonPrimary, InputPasswordShow, HorizontalRule } from "@/styles/ComponentStyles";
+import { LinkStyle } from "@/styles/ComponentStyles";
+import { FormSection, InputWithOption } from "@/styles/FormStyles";
+import InputGroup from "@/components/forms/InputGroup";
 
-const Signin = () => {
+const SignIn = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
@@ -32,62 +36,74 @@ const Signin = () => {
 
     if (res?.error) {
       setError(res.error as string)
-    };
+    }
 
     if (!res?.error) {
       return router.push("/")
-    };
+    }
   };
 
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
-        {error && <div>{error}</div>}
-        <h1>Signin</h1>
+    <>
+      <h2>Sign In</h2>
 
-        <label>Email:</label>
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-        />
+      <FormSection>
+        <fieldset>
+          <legend>Input Credentials Info</legend>
 
-        <label>Password:</label>
-        <div>
-          <input
-            type={showPassword ? "text" : "password"}
-            placeholder="Password"
-            name="password"
-          />
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              setShowPassword(!showPassword)
-            }}
-          >
-            {showPassword ? <BiSolidHide /> : <BiSolidShow />}
-          </button>
-        </div>
-        <button type="submit">
-          Signup
-        </button>
-        
+          <form onSubmit={handleSubmit}>
+            {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
 
-        <button
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            signIn("google")
-          }}>
-          <BiLogoGoogle /> Sign in with Google
-        </button>
-        <Link href="/member/join">
+            <InputGroup
+              type="email"
+              label="Email"
+              title="Email"
+              placeholder="Email"
+              name="email"
+            />
+
+            <InputWithOption>
+              <InputGroup
+                type={showPassword ? "text" : "password"}
+                title="Password"
+                label="Password"
+                placeholder="Password"
+                name="password"
+              />
+              <InputPasswordShow
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowPassword(!showPassword)
+                }}
+              >
+                {showPassword ? <BiSolidHide/> : <BiSolidShow/>}
+              </InputPasswordShow>
+            </InputWithOption>
+            <ButtonPrimary type="submit">
+              Login
+            </ButtonPrimary>
+
+            <HorizontalRule />
+
+            <button
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                signIn("google")
+              }}>
+              <BiLogoGoogle/> Sign in with Google
+            </button>
+
+          </form>
+        </fieldset>
+
+        <LinkStyle href="/member/join" $scroll={false}>
           Don&apos;t have an account?
-        </Link>
-      </form>
-    </section>
+        </LinkStyle>
+      </FormSection>
+    </>
   );
 }
 
-export default Signin;
+export default SignIn;

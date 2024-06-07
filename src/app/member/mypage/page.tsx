@@ -3,7 +3,7 @@
 export default function Mypage() {
     return (
         <>
-            <h2>Mypage</h2>
+            <h2>My page</h2>
         </>
     );
 }

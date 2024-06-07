@@ -44,6 +44,13 @@ const FooterSection = styled.div`
     }
 `;
 
+const FooterSimple = styled.div`
+    font-size: 13px;
+    color: #828282;
+    text-align: center;
+`;
+
 export {
-    FooterSection
+    FooterSection,
+    FooterSimple
 }

@@ -16,7 +16,7 @@ export default function Header() {
     const pathname = usePathname();
 
     const menuData = [
-        { id: "menu01", title: `${session?.user?.name}`, path: "/member/mypage" },
+        { id: "menu01", title: `${session ? (session.user.name) : ""}`, path: "/member/mypage" },
         { id: "menu02", title: "Users", path: "/member/users" },
     ];
 

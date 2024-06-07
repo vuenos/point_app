@@ -23,12 +23,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 #### NextAuth.js 구현과 오류 해결
 - 사용자인증을 [NextAuth.js](https://next-auth.js.org/getting-started/introduction) 로 적용하기로 함.
 - 공식사이트에서는 Next.js 을 위한 완전한 오픈 소스로 소개하고 있다.
-- 인증을 구현하는 resource 들이 잘정리되어 있는 느낌이다. [Get Started](https://next-auth.js.org/getting-started/example)
+- 인증을 구현하는 resource 들이 잘정리되어 있다. [Get Started](https://next-auth.js.org/getting-started/example)
 
 ### 시작하며
 - NextAuth.js 는 ```/api/auth``` path 안에서 인증을 처리한다.
-- /app/api/auth/[...nextauth]/route.ts 라우트를 만들어 GET, POST method 를 매핑하는 handler 를 만들어 준다.
+- /app/api/auth/[...nextauth]/route.ts 라우트를 만들어 GET, POST method 를 매핑하는 handler 를 만들어 준다. (Next.js 14 기준)
+- [...] 은 동적 라우팅을 의미함. signIn, signOut, callback 등의 요청이 여기를 통해 처리된다. auth.ts 를 연결해서 인증부분까지
+> All requests to /api/auth/*(signIn, callback, signOut, etc.) will automatically be handled by NextAuth.js.
   
+- /api/auth/* 로 들어오는 api 요청은 /api/auth/[...nextauth]/route.ts 에서 자동으로 처리해 준다는 것이다.
+
 ```javascript
 // app/api/auth/[...nextauth]/route.ts
 import { authOptions } from "@/libs/auth";
@@ -41,7 +45,11 @@ export {
 }
 ```
 - 인증을 처리하는 auth.ts 를 작성한다. 나는 ```/app/lib/auth.ts``` 로 작성
+
+
 ```javascript
+// /app/lib/auth.ts
+
 export const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
@@ -76,8 +84,10 @@ export const authOptions: NextAuthOptions = {
 // 생략
 ```
 - 기본적으로 email 과 비밀번호 인증을 제공한다. 구글 OAuth 도 제공한다.
+- provider 로 구글, 깃허브 같은 OAuth 인증, 기본적인 credentials 와 같은 자격증명인증(email 또는 ID 와 비밀번호)을 제공한다. 
+- ```CredentiaslProvider``` 에서는 ```credentials``` 프로퍼티를 통해 인증을 위해 어떤 정보를 입력받을지 지정할 수 있다. (email or user id)
+- 위에서 입력받은 프로퍼티 값을 가진 객체가 authorize 콜백 함수에 첫번째 인수로 전달됨(HTTP POST) 그러면 사용자객체(email, name, _id 등), 또는 null, Error 중 하나를 반환하는 것이다.
 - 
-
 
 ### 📆 June 4, 2024
 #### 사용자 등록 로직

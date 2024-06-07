@@ -6,6 +6,7 @@ const ResetStyles = css`
         margin: 0;
         padding: 0;
         font-size: 100%;
+        letter-spacing: 0.064em;
     }
 
     article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {

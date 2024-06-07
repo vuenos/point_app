@@ -1,18 +1,29 @@
 "use client";
 import Link from "next/link"
-import { FooterSection } from "@/styles/FooterStyles";
+import { FooterSection, FooterSimple } from "@/styles/FooterStyles";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
-    return (
-        <FooterSection>
-            <div className="copy">
-                &copy; Pointapp
-            </div>
+    const pathname = usePathname();
 
-            <nav>
-                <Link href="/agreement" scroll={false}>Agreement</Link>
-                <Link href="/privacy" scroll={false}>privacy</Link>
-            </nav>
-        </FooterSection>
+    return (
+        <>
+            {pathname === "/member/login"
+                ?
+                <FooterSimple>
+                    &copy; PointApp
+                </FooterSimple>
+                :
+                <FooterSection>
+                    <div className="copy">
+                        &copy; PointApp
+                    </div>
+                    <nav>
+                        <Link href="/agreement" scroll={false}>Agreement</Link>
+                        <Link href="/privacy" scroll={false}>privacy</Link>
+                    </nav>
+                </FooterSection>
+            }
+        </>
     );
 }
