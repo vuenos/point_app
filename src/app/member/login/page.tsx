@@ -13,7 +13,7 @@ import { LinkStyle } from "@/styles/ComponentStyles";
 import { FormSection, InputWithOption } from "@/styles/FormStyles";
 import InputGroup from "@/components/forms/InputGroup";
 
-const Signin = ({ props }) => {
+const SignIn = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
@@ -106,4 +106,4 @@ const Signin = ({ props }) => {
   );
 }
 
-export default Signin;
+export default SignIn;
