@@ -5,12 +5,15 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useSession } from 'next-auth/react';
-import { BiLogoGoogle } from 'react-icons/bi';
+import { RiGoogleFill } from "react-icons/ri";
+import { RiGithubFill } from "react-icons/ri";
+import { RiKakaoTalkFill } from "react-icons/ri";
 import { BiSolidShow } from 'react-icons/bi';
 import { BiSolidHide } from 'react-icons/bi';
 import { CalloutBox, ButtonPrimary, InputPasswordShow, HorizontalRule } from "@/styles/ComponentStyles";
 import { LinkStyle } from "@/styles/ComponentStyles";
-import { FormSection, InputWithOption } from "@/styles/FormStyles";
+import { FormSection, InputWithOption, OAuthSection } from "@/styles/FormStyles";
+import { OAuthCallButton } from "@/styles/ComponentStyles";
 import InputGroup from "@/components/forms/InputGroup";
 
 const SignIn = () => {
@@ -86,14 +89,35 @@ const SignIn = () => {
 
             <HorizontalRule />
 
-            <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                signIn("google")
-              }}>
-              <BiLogoGoogle/> Sign in with Google
-            </button>
+            <OAuthSection>
+              <span className="title">Sign in with: </span>
+              <OAuthCallButton
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn("google")
+                  }}>
+                <RiGoogleFill />
+              </OAuthCallButton>
+
+              <OAuthCallButton
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn("github")
+                  }}>
+                <RiGithubFill />
+              </OAuthCallButton>
+
+              <OAuthCallButton
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn("kakao")
+                  }}>
+                <RiKakaoTalkFill />
+              </OAuthCallButton>
+            </OAuthSection>
 
           </form>
         </fieldset>

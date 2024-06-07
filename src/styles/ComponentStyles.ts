@@ -36,6 +36,26 @@ const ButtonBackToPage = styled.button`
     }
 `;
 
+const OAuthCallButton = styled.button`
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid #cecece;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 20px;
+    color: #727272;
+    
+    svg {
+        color: #000;
+    }
+    
+    &:hover svg {
+        color: #999;
+        transition: all 0.3s;
+    }
+`;
+
 const Loader = styled.div`
     position: fixed;
     top: calc(50% - 60px);
@@ -111,6 +131,7 @@ const LinkStyle = styled.a.attrs<{$scroll?: {}}>(props =>({
 export {
     ButtonPrimary,
     ButtonBackToPage,
+    OAuthCallButton,
     Loader,
     CalloutBox,
     InputPasswordShow,
