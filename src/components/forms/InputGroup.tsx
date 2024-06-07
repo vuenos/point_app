@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Input, { InputProps } from "./Input";
-
+import { InputWithLabel } from "@/styles/FormStyles";
 export interface InputGroupProps extends InputProps {
    children?: ReactNode,
    label?: string,
@@ -16,7 +16,7 @@ export default function InputGroup(props: InputGroupProps) {
     } = props;
 
     return (
-        <div
+        <InputWithLabel
             className={invalidText ? `${className}` : className}
         >
             {label && 
@@ -48,6 +48,6 @@ export default function InputGroup(props: InputGroupProps) {
             }
 
             {invalidText && <div>{invalidText}</div>}
-        </div>
+        </InputWithLabel>
     )
 }

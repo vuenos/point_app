@@ -26,8 +26,8 @@ export default function RootLayout({
         <body className={noto.className}>
           <StyledComponentsRegistry>
             <GlobalStyles />
-              <Header />
-              <Wrapper>{children}</Wrapper>
+            <Header />
+            <Wrapper>{children}</Wrapper>
             <Footer />
           </StyledComponentsRegistry>
         </body>

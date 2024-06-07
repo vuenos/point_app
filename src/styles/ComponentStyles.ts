@@ -1,6 +1,7 @@
 "use client";
 
 import { styled } from "styled-components";
+import {string} from "prop-types";
 
 const ButtonPrimary = styled.button`
     display: inline-block;
@@ -10,7 +11,7 @@ const ButtonPrimary = styled.button`
     border-radius: 8px;
     line-height: 40px;
     color: #ffffff;
-    background-color: #0d6efd;
+    background: linear-gradient(45deg, rgba(203, 33, 189, 1) 0%, rgba(92, 30, 237, 1) 100%);
 `;
 
 const ButtonBackToPage = styled.button`
@@ -79,9 +80,40 @@ const CalloutBox = styled.div`
         }
 `;
 
+const InputPasswordShow = styled.button`
+    width: 32px;
+    height: 32px;
+    
+    &:hover {
+        
+    }
+`;
+
+const HorizontalRule = styled.hr`
+    margin: 24px 0;
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+`;
+
+const LinkStyle = styled.a.attrs<{$scroll?: {}}>(props =>({
+    $scroll : props.$scroll || `{false}`
+}))`
+    color: #1724a3;
+    text-decoration: underline;
+    
+    &:link {
+        text-decoration: underline;
+    }
+`;
+
 export {
     ButtonPrimary,
     ButtonBackToPage,
     Loader,
     CalloutBox,
+    InputPasswordShow,
+    HorizontalRule,
+    LinkStyle,
 }
