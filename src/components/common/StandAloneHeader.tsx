@@ -12,7 +12,7 @@ export default function StandAloneHeader () {
             </h1>
 
             <nav>
-                <Link href="/member/join" scroll={false}>Sign Up</Link>
+                <Link href="/member/join" className="signup-link" scroll={false}>Sign Up</Link>
             </nav>
         </StandAloneHeaderSection>
     )

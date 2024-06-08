@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@colors/colors": "^1.6.0",
+    "@nextui-org/skeleton": "^2.0.28",
     "@reduxjs/toolkit": "^2.2.4",
     "@types/crypto-js": "^4.2.2",
     "@types/jsonwebtoken": "^9.0.6",
