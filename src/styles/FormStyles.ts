@@ -89,6 +89,10 @@ const FormSection = styled.div`
     form > ${InputWithLabel} {
         margin-top: 0;
     }
+
+    form ${InputWithLabel} + ${InputWithLabel} {
+        margin-top: 24px;
+    }
 `;
 
 const OAuthSection = styled.div`

@@ -37,7 +37,7 @@ export default function Header() {
         } else if (status === "loading") {
             return <Loading />
         } else {
-            return <Link href="/member/login" scroll={false}>Log In</Link>
+            return <Link href="/member/login" className="login-link" scroll={false}>Log In</Link>
         }
     }
 
@@ -62,7 +62,7 @@ export default function Header() {
                                 {menuItem.title}
                             </Link>
                         ))}
-                        {!(status === "authenticated") && <Link href="/member/join"  scroll={false}>Sign Up</Link>}
+                        {!(status === "authenticated") && !(pathname === "/member/join") ? <Link href="/member/join" className="signup-link" scroll={false}>Sign Up</Link> : ""}
                         {showSession()}
                     </nav>
                 </HeaderSection>

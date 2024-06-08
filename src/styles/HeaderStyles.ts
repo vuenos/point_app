@@ -41,7 +41,7 @@ const HeaderSection = styled.div`
         a {
             display: flex;
             align-items: center;
-            margin-left: 24px;
+            margin-left: 16px;
             color: #727272;
             line-height: 32px;
 
@@ -62,7 +62,7 @@ const HeaderSection = styled.div`
     }
 `;
 
-const StandAloenHeaderSection = styled.div`
+const StandAloneHeaderSection = styled.div`
     position: fixed;
     z-index: 2;
     top: 0;
@@ -101,7 +101,7 @@ const StandAloenHeaderSection = styled.div`
         a {
             display: flex;
             align-items: center;
-            margin-left: 24px;
+            margin-left: 16px;
             color: #727272;
             line-height: 32px;
 
@@ -124,5 +124,5 @@ const StandAloenHeaderSection = styled.div`
 
 export {
     HeaderSection,
-    StandAloenHeaderSection
+    StandAloneHeaderSection
 }
