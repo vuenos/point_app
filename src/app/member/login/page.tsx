@@ -15,6 +15,7 @@ import { LinkStyle } from "@/styles/ComponentStyles";
 import { FormSection, InputWithOption, OAuthSection } from "@/styles/FormStyles";
 import { OAuthCallButton } from "@/styles/ComponentStyles";
 import InputGroup from "@/components/forms/InputGroup";
+import Loading from "@/app/member/login/loading";
 
 const SignIn = () => {
   const [error, setError] = useState("");
@@ -59,6 +60,7 @@ const SignIn = () => {
 
           <form onSubmit={handleSubmit}>
             {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
+            {loading && <Loading />}
 
             <InputGroup
               type="email"
