@@ -35,7 +35,7 @@ export default function Header() {
                 </LogoutButton>
           )
         } else if (status === "loading") {
-          return <SkeletonSpan width="57px" />
+          return <SkeletonSpan width="57px" height="32px" margin="0 0 0 16px" />
         } else {
             return <Link href="/member/login" className="login-link" scroll={false}>Log In</Link>
         }

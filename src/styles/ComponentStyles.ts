@@ -151,14 +151,15 @@ const loadingAnimation = keyframes`
   }
 `;
 
-const SkeletonSpan = styled.span<{ width: string, height: string }>`
+const SkeletonSpan = styled.span<{ width: string, height: string, margin: string }>`
     display: block;
-    height: 1em;
     background: linear-gradient(90deg, #DADADA, #f5f5f5, #DADADA);
     background-size: 200% 100%;
     animation: ${loadingAnimation} 1.5s infinite;
     width: ${props => props.width};
-    border-radius: 4px;
+    height: ${props => props.height};
+    margin: ${props => props.margin};
+    border-radius: 8px;
 `;
 
 export {

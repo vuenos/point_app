@@ -19,6 +19,8 @@ import InputGroup from "@/components/forms/InputGroup";
 const SignIn = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -30,19 +32,20 @@ const SignIn = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const res = await signIn("credentials", {
-      email: formData.get("email"),
-      password: formData.get("password"),
-      redirect: false,
-    });
 
-    if (res?.error) {
-      setError(res.error as string)
-    }
-
-    if (!res?.error) {
+    try {
+      setLoading(true);
+      const formData = new FormData(event.currentTarget);
+      const res = await signIn("credentials", {
+        email: formData.get("email"),
+        password: formData.get("password"),
+        redirect: false,
+      });
+      setLoading(false);
       return router.push("/")
+    } catch (error: any) {
+      setLoading(false);
+      setError(error as string);
     }
   };
 
