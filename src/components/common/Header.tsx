@@ -35,7 +35,7 @@ export default function Header() {
                 </LogoutButton>
           )
         } else if (status === "loading") {
-          return <span>....</span>
+          return <span className="loginBtnSkel"></span>
         } else {
             return <Link href="/member/login" className="login-link" scroll={false}>Log In</Link>
         }

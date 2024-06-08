@@ -112,6 +112,12 @@ const GlobalStyles = createGlobalStyle`
             transition: all 0.3s;
         }
     }
+    
+    .loginBtnSkel {
+        display: inline-block;
+        width: 57px;
+        height: 32px;
+    }
 `;
 
 export default GlobalStyles;
