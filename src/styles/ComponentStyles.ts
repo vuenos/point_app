@@ -56,6 +56,20 @@ const OAuthCallButton = styled.button`
     }
 `;
 
+const LogoutButton = styled.button`
+    width: 32px;
+    height: 32px;
+    margin-left: 16px;
+    text-align: center;
+    border-radius: 6px;
+    
+    &:hover {
+        background-color: #f1f1f1;
+        color: #666666;
+        transition: all 0.3s;
+    }
+`;
+
 const Loader = styled.div`
     position: fixed;
     top: calc(50% - 60px);
@@ -132,6 +146,7 @@ export {
     ButtonPrimary,
     ButtonBackToPage,
     OAuthCallButton,
+    LogoutButton,
     Loader,
     CalloutBox,
     InputPasswordShow,
