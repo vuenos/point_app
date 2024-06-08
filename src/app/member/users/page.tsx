@@ -31,7 +31,7 @@ export default function GetUsers () {
             setError(true);            
             setLoading(false);
             setErrMsg(
-                error.reponse && error.response.data.message
+                error.response && error.response.data.message
                 ? error.response.data.message
                 : error.message
             );

@@ -1,6 +1,6 @@
 "use client";
 
-import { styled } from "styled-components";
+import {keyframes, styled} from "styled-components";
 import {string} from "prop-types";
 
 const ButtonPrimary = styled.button`
@@ -52,6 +52,20 @@ const OAuthCallButton = styled.button`
     
     &:hover svg {
         color: #999;
+        transition: all 0.3s;
+    }
+`;
+
+const LogoutButton = styled.button`
+    width: 32px;
+    height: 32px;
+    margin-left: 16px;
+    text-align: center;
+    border-radius: 6px;
+    
+    &:hover {
+        background-color: #f1f1f1;
+        color: #666666;
         transition: all 0.3s;
     }
 `;
@@ -128,13 +142,35 @@ const LinkStyle = styled.a.attrs<{$scroll?: {}}>(props =>({
     }
 `;
 
+const loadingAnimation = keyframes`
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+`;
+
+const SkeletonSpan = styled.span<{ width: string, height: string, margin: string }>`
+    display: block;
+    background: linear-gradient(90deg, #DADADA, #f5f5f5, #DADADA);
+    background-size: 200% 100%;
+    animation: ${loadingAnimation} 1.5s infinite;
+    width: ${props => props.width};
+    height: ${props => props.height};
+    margin: ${props => props.margin};
+    border-radius: 8px;
+`;
+
 export {
-    ButtonPrimary,
-    ButtonBackToPage,
-    OAuthCallButton,
-    Loader,
-    CalloutBox,
-    InputPasswordShow,
-    HorizontalRule,
-    LinkStyle,
+  ButtonPrimary,
+  ButtonBackToPage,
+  OAuthCallButton,
+  LogoutButton,
+  Loader,
+  CalloutBox,
+  InputPasswordShow,
+  HorizontalRule,
+  LinkStyle,
+  SkeletonSpan,
 }

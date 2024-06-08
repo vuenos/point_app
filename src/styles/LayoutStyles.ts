@@ -2,6 +2,8 @@ import { styled, css } from "styled-components";
 
 const MainSection = styled.main`
     display: flex;
+    overflow: hidden;
+    overflow-y: auto;
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;

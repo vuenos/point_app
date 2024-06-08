@@ -3,10 +3,12 @@ import {useEffect, useState} from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { HeaderSection } from "@/styles/HeaderStyles";
+import { LogoutButton, SkeletonSpan } from "@/styles/ComponentStyles"
 import StandAloneHeader from "./StandAloneHeader";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import Loading from "@/app/loading";
+import { FaRightFromBracket } from "react-icons/fa6";
 
 export default function Header() {
     const [userName, setUserName] = useState<string>("John Doe");
@@ -23,19 +25,19 @@ export default function Header() {
     const showSession = () => {
         if (status === "authenticated") {
             return (
-                <button
+                <LogoutButton
                     type="button"
                     onClick={() => {
                         signOut();
                     }}
                 >
-                    Logout
-                </button>
+                    <FaRightFromBracket />
+                </LogoutButton>
           )
         } else if (status === "loading") {
-            return <Loading />
+          return <SkeletonSpan width="57px" height="32px" margin="0 0 0 16px" />
         } else {
-            return <Link href="/member/login" scroll={false}>Login</Link>
+            return <Link href="/member/login" className="login-link" scroll={false}>Log In</Link>
         }
     }
 
@@ -60,7 +62,7 @@ export default function Header() {
                                 {menuItem.title}
                             </Link>
                         ))}
-                        {!(status === "authenticated") && <Link href="/member/join"  scroll={false}>Sign Up</Link>}
+                        {!(status === "authenticated") && !(pathname === "/member/join") ? <Link href="/member/join" className="signup-link" scroll={false}>Sign Up</Link> : ""}
                         {showSession()}
                     </nav>
                 </HeaderSection>

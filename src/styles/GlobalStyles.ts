@@ -77,6 +77,47 @@ const GlobalStyles = createGlobalStyle`
         -webkit-print-color-scheme: light only;
         color-scheme: light only;
     }
+    
+    .login-link {
+        display: inline-block;
+        height: 32px;
+        border: 1px solid #cecece;
+        border-radius: 8px;
+        padding: 0 8px;
+        font-size: 13px;
+        letter-spacing: 0;
+        color: #000000 !important;
+        font-weight: 700;
+        
+        &:hover {
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+    }
+
+    .signup-link {
+        display: inline-block;
+        height: 32px;
+        border: 1px solid #cecece;
+        border-radius: 8px;
+        padding: 0 8px;
+        font-size: 13px;
+        letter-spacing: 0;
+        color: #FFFFFF !important;
+        font-weight: 700;
+        background: linear-gradient(45deg, rgba(203,33,189,1) 0%, rgba(92,30,237,1) 100%);
+
+        &:hover {
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+    }
+    
+    .loginBtnSkel {
+        display: inline-block;
+        width: 57px;
+        height: 32px;
+    }
 `;
 
 export default GlobalStyles;
