@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { HeaderSection } from "@/styles/HeaderStyles";
-import { LogoutButton } from "@/styles/ComponentStyles"
+import { LogoutButton, SkeletonSpan } from "@/styles/ComponentStyles"
 import StandAloneHeader from "./StandAloneHeader";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
@@ -35,7 +35,7 @@ export default function Header() {
                 </LogoutButton>
           )
         } else if (status === "loading") {
-          return <span className="loginBtnSkel"></span>
+          return <SkeletonSpan width="57px" />
         } else {
             return <Link href="/member/login" className="login-link" scroll={false}>Log In</Link>
         }
