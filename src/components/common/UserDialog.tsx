@@ -8,7 +8,7 @@ interface UserDialogProps {
   user: { name: string; email: string };
 }
 
-export default function UserDialog({isOpen, onClose, user}) {
+const UserDialog: React.FC<UserDialogProps> = ({isOpen, onClose, user}) => {
   if (!isOpen) return null;
 
   return (
@@ -21,3 +21,5 @@ export default function UserDialog({isOpen, onClose, user}) {
     </div>
   );
 }
+
+export default UserDialog;
