@@ -52,7 +52,6 @@ const HeaderSection = styled.div`
             &.active {
                 font-weight: 700;
                 color: #000000;
-                letter-spacing: -0.024em;
             }
             
             svg {

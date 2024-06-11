@@ -72,11 +72,12 @@ const LogoutButton = styled.button`
 
 const Loader = styled.div`
     position: fixed;
-    top: calc(50% - 60px);
-    left: calc(50% - 80px);
-    width: 160px;
-    height: 120px;
-    background-color: #ffffff;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
