@@ -5,7 +5,7 @@ import React from 'react';
 interface UserDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  user: { name: string; email: string };
+  user: { name?: string; email?: string };
 }
 
 const UserDialog: React.FC<UserDialogProps> = ({isOpen, onClose, user}) => {

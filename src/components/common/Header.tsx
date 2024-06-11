@@ -49,7 +49,6 @@ export default function Header() {
     setIsDialogOpen(false);
   };
 
-
   return (
     <>
       {pathname === "/member/login"
@@ -71,6 +70,7 @@ export default function Header() {
                 {menuItem.title}
               </Link>
             ))}
+
             {!(status === "authenticated") && !(pathname === "/member/join") ?
               <Link href="/member/join" className="signup-link" scroll={false}>Sign Up</Link> : ""}
             {session && <button onClick={handleUserClick}>{session.user.name}</button>}
