@@ -18,6 +18,10 @@ export default function Header() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
 
+  useEffect(() => {
+    setIsDialogOpen(false)
+  }, [pathname])
+
   const menuData = [
     {id: "menu01", title: "Users", path: "/member/users"},
   ];
@@ -59,7 +63,7 @@ export default function Header() {
   }
 
   const handleUserClick = () => {
-    setIsDialogOpen(true);
+    setIsDialogOpen(prevIsDialogOpen => !prevIsDialogOpen)
   };
 
   const handleCloseDialog = () => {

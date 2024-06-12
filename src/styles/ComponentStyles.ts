@@ -71,7 +71,7 @@ const UserNameButton = styled.button`
     letter-spacing: -0.064em;
     color: #FFFFFF !important;
     font-weight: 700;
-    background: linear-gradient(45deg, rgba(203,33,189,1) 0%, rgba(92,30,237,1) 100%);
+    background: linear-gradient(45deg, rgb(65 155 210) 0%, rgb(239 117 94) 100%);
 
     &:hover {
         opacity: 0.8;

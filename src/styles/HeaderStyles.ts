@@ -121,7 +121,22 @@ const StandAloneHeaderSection = styled.div`
     }
 `;
 
+const UserDialogStyle = styled.div`
+    position: fixed;
+    top: 56px;
+    width: 200px;
+    height: 200px;
+    padding: 16px;
+    border: 1px solid #cecece;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .06);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .06);
+`;
+
 export {
     HeaderSection,
-    StandAloneHeaderSection
+    StandAloneHeaderSection,
+    UserDialogStyle
 }
