@@ -25,19 +25,32 @@ export default function Header() {
   const showSession = () => {
     if (status === "authenticated") {
       return (
-        <LogoutButton
-          type="button"
-          onClick={() => {
-            signOut();
-          }}
-        >
+        <>
+          <button onClick={handleUserClick}>{session.user.name}</button>
+          <LogoutButton
+            type="button"
+            onClick={() => {
+              signOut();
+            }}
+          >
           <FaRightFromBracket/>
         </LogoutButton>
+        </>
       )
     } else if (status === "loading") {
-      return <SkeletonSpan width="57px" height="32px" margin="0 0 0 16px"/>
+      return (
+        <>
+          <SkeletonSpan width="67px" height="32px" margin="0 0 0 16px"/>
+          <SkeletonSpan width="57px" height="32px" margin="0 0 0 16px"/>
+        </>
+      )
     } else {
-      return <Link href="/member/login" className="login-link" scroll={false}>Log In</Link>
+      return (
+        <>
+          <Link href="/member/join" className="signup-link" scroll={false}>Sign Up</Link>
+          <Link href="/member/login" className="login-link" scroll={false}>Log In</Link>
+        </>
+      )
     }
   }
 
@@ -71,13 +84,9 @@ export default function Header() {
               </Link>
             ))}
 
-            {!(status === "authenticated") && !(pathname === "/member/join") ?
-              <Link href="/member/join" className="signup-link" scroll={false}>Sign Up</Link> : ""}
-            {session && <button onClick={handleUserClick}>{session.user.name}</button>}
+            {showSession()}
 
             <UserDialog isOpen={isDialogOpen} onClose={handleCloseDialog} user={session?.user}/>
-
-            {showSession()}
           </nav>
         </HeaderSection>
       }
