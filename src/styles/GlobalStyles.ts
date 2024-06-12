@@ -80,11 +80,14 @@ const GlobalStyles = createGlobalStyle`
     
     .login-link {
         display: inline-block;
+        justify-content: center;
+        width: 64px;
         height: 32px;
         border: 1px solid #cecece;
         border-radius: 8px;
-        padding: 0 8px;
+        padding: 0 4px;
         font-size: 13px;
+        text-align: center;
         letter-spacing: 0;
         color: #000000 !important;
         font-weight: 700;
@@ -97,10 +100,12 @@ const GlobalStyles = createGlobalStyle`
 
     .signup-link {
         display: inline-block;
+        justify-content: center;
+        width: 68px;
         height: 32px;
         border: 1px solid #cecece;
         border-radius: 8px;
-        padding: 0 8px;
+        padding: 0 4px;
         font-size: 13px;
         letter-spacing: 0;
         color: #FFFFFF !important;
