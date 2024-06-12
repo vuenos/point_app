@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import {HeaderSection} from "@/styles/HeaderStyles";
-import {LogoutButton, SkeletonSpan} from "@/styles/ComponentStyles"
+import {LogoutButton, UserNameButton, SkeletonSpan} from "@/styles/ComponentStyles"
 import StandAloneHeader from "./StandAloneHeader";
 import {useSession} from "next-auth/react";
 import {signOut} from "next-auth/react";
@@ -26,22 +26,26 @@ export default function Header() {
     if (status === "authenticated") {
       return (
         <>
-          <button onClick={handleUserClick}>{session.user.name}</button>
+          <UserNameButton 
+            onClick={handleUserClick}
+          >
+            {session.user.name}
+          </UserNameButton>
           <LogoutButton
             type="button"
             onClick={() => {
               signOut();
             }}
           >
-          <FaRightFromBracket/>
+          Log Out
         </LogoutButton>
         </>
       )
     } else if (status === "loading") {
       return (
         <>
-          <SkeletonSpan width="67px" height="32px" margin="0 0 0 16px"/>
-          <SkeletonSpan width="57px" height="32px" margin="0 0 0 16px"/>
+          <SkeletonSpan width="68px" height="32px" margin="0 0 0 16px"/>
+          <SkeletonSpan width="64px" height="32px" margin="0 0 0 16px"/>
         </>
       )
     } else {
