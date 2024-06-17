@@ -122,17 +122,56 @@ const StandAloneHeaderSection = styled.div`
 `;
 
 const UserDialogStyle = styled.div`
+overflow: hidden;
     position: fixed;
     top: 56px;
     width: 200px;
     height: 200px;
-    padding: 16px;
     border: 1px solid #cecece;
     border-radius: 12px;
     background-color: #FFFFFF;
     font-size: 14px;
     -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .06);
     box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .06);
+
+    .user-info-wrap {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .info-list {
+            padding: 16px 16px 8px 16px;
+
+            li {
+                margin-top: 8px;
+                color: #727272;
+            }
+        }
+
+        .foot {
+            margin-top: auto;
+            padding: 8px 8px;
+            text-align: right;
+            background-color: #f9f9f9;
+
+            button {
+                border: 1px solid #cecece;
+                border-radius: 8px;
+                padding: 4px 8px;
+                background-color: #FFFFFF;
+                font-size: 12px;
+                color: #727272;
+
+                svg {
+                    vertical-align: middle;
+                }
+
+                &:hover {
+                    color: #000000;
+                }
+            }
+        }
+    }
 `;
 
 export {
