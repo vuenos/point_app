@@ -19,6 +19,63 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 June, 2024
+#### Session 정보 display 이슈
+- Nextauth (현재 4.x) 가 5.x 버전으로 업데이트 되면서 서비스 명칭이 [Auth.js](https://authjs.dev/) 으로 바뀌었다. 아직까지는 5버전으로 마이그레이션 하지 않음 상태.
+- 인증을 하고 session 이 풀리는 현상이 있음. (새로고침 등)
+- session 딜레이: 인증 session 취득 후 next/link 를 통한 인터널 페이지 이동에서는 보이지 않으나 새로고침을 했을 경우 session 취득 이전의 UI (Sign In, Log In 버튼 등)이 약 1~2초 정도 보인 후 session 이 적용된 UI (유저네임, Log Out)가 보이는 현상이 있음.
+- SSR 이슈인가? Nextauth의 버그인가? 5.x 로 업데이트 하면 해결되는 것인지? 현재로써는 좀 더 확인해 봐야 할 문제같다.
+- Auth.js 에서 session prefetch 기능이 있다. Roor 컴포넌트 Provider 에서 session 이란 props 를 통해 route 이동시에 미리 session 정보를 가지고 있는가는 개념같은데, SessionProvider 에서 이 부분이 이미 적용되어 있는거 아니었나? 이 부분은 좀 더 확인필요함.
+- 일단은 Session status 의 Loading 상태로 중간에 생기는 딜레이 중에 해당 UI 부분에 스켈레톤 UI를 적용해서 로딩 UI를 표현함.
+```javascript
+// Session status 'Loading' 일 때 보여 줄 UI 객체
+const loadingAnimation = keyframes`
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+`;
+
+const SkeletonSpan = styled.span<{ width: string, height: string, margin: string }>`
+    display: block;
+    background: linear-gradient(90deg, #DADADA, #f5f5f5, #DADADA);
+    background-size: 200% 100%;
+    animation: ${loadingAnimation} 1.5s infinite;
+    width: ${props => props.width};
+    height: ${props => props.height};
+    margin: ${props => props.margin};
+    border-radius: 8px;
+`;
+
+// Header.tsx 
+const showSession = () => {
+    if (status === "authenticated") {
+      return (
+        <>
+          ...
+        </>
+      )
+    } else if (status === "loading") {
+      return (
+        <>
+          <SkeletonSpan width="68px" height="32px" margin="0 0 0 16px"/>
+          <SkeletonSpan width="64px" height="32px" margin="0 0 0 16px"/>
+        </>
+      )
+    } else {
+      return (
+        <>
+          ...
+        </>
+      )
+    }
+  }
+```
+   
+   <img src="./public/session-loading.png" alt="" />
+
 ### 📆 June 5, 2024
 #### NextAuth.js 구현과 오류 해결
 - 사용자인증을 [NextAuth.js](https://next-auth.js.org/getting-started/introduction) 로 적용하기로 함.
