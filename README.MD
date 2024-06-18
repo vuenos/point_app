@@ -20,6 +20,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## ⏳ History
 
 ### 📆 June, 2024
+#### OAuth
+- google, github 등의 OAuth 설정이 생각보다 쉽다.
+- 로컬 env에 GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET 와 같은 설정을 추가하고, 해당 콘솔화면(Configuration)에서 Callback URI 를 추가해 주면 된다.
+- [OAuth 제공 페이지](https://next-auth.js.org/providers/) 에서 자세한 설정을 참고.
+- 인증을 위한 callback URI 는 /api/auth/callback/google 이런식이다.
+- production 도메인과 localhost를 같이 추가할 수 없는 경우는 로컬 환경에서 production 도메인으로 넘어갈 수 있다.
+- 이 때, 배포되는 서버에 배포 환경설정도 같이 설정해 줘야 한다.
+
+
+### 📆 June, 2024
 #### Session 정보 display 이슈
 - Nextauth (현재 4.x) 가 5.x 버전으로 업데이트 되면서 서비스 명칭이 [Auth.js](https://authjs.dev/) 으로 바뀌었다. 아직까지는 5버전으로 마이그레이션 하지 않음 상태.
 - 인증을 하고 session 이 풀리는 현상이 있음. (새로고침 등)
