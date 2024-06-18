@@ -27,6 +27,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - 인증을 위한 callback URI 는 /api/auth/callback/google 이런식이다.
 - production 도메인과 localhost를 같이 추가할 수 없는 경우는 로컬 환경에서 production 도메인으로 넘어갈 수 있다.
 - 이 때, 배포되는 서버에 배포 환경설정도 같이 설정해 줘야 한다.
+- Vercel 에서 배포시 Enviroment 의 용도를 설정할 수 있다. (Production, Development)
 
 
 ### 📆 June, 2024
