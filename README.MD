@@ -19,6 +19,15 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## ⏳ History
 
+### 📆 June 18, 2024
+#### 포인트 카드 생성
+- 카드생성 화면에서 카드 신청 버튼 클릭시 Random 카드일련와 CVC(Card Verification Code) 번호 생성
+- 생성된 카드정보를 데이터베이스에 저장.
+
+#### 포인트 카드 등록
+- 실물카드가 아닌 디지털카드 등록 (카드번호 + CVC) 
+
+
 ### 📆 June, 2024
 #### OAuth
 - google, github 등의 OAuth 설정이 생각보다 쉽다.
