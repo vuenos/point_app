@@ -7,8 +7,8 @@ import axios, {AxiosError} from "axios";
 import {useRouter} from "next/navigation";
 import {useSession} from "next-auth/react";
 import Loading from "@/app/card/regist/loading";
-import {ButtonPrimary, LinkStyle} from "@/styles/ComponentStyles";
-import onInput from "@/utils/onInput";
+import {ButtonPrimary, CalloutBox, LinkStyle} from "@/styles/ComponentStyles";
+// import onInput from "@/utils/onInput";
 
 export default function CardRegist() {
 
@@ -16,32 +16,31 @@ export default function CardRegist() {
   const {data: session, status} = useSession();
   const router = useRouter();
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/member/login")
+    }
+  }, [status]);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
       const formData = new FormData(event.currentTarget);
-      const cardSaveResponse = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/card`, {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/card`, {
         cardNumber: formData.get("cardNumber"),
         cvc: formData.get("cvc"),
       });
+      console.log(res.data)
 
-      if (cardSaveResponse) return router.push("/")
-
-    } catch (error: any) {
-      console.log(error);
+    } catch (error) {
+      console.log(error.message);
       if (error instanceof AxiosError) {
         const errorMessage = error.response?.data.message;
         setError(errorMessage);
       }
     }
   }
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/member/login")
-    }
-  }, [status, router]);
 
   if (status === "authenticated") {
     return (
@@ -52,6 +51,8 @@ export default function CardRegist() {
           <fieldset>
             <legend>Input Card serial</legend>
             <form onSubmit={handleSubmit}>
+              {/*{error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}*/}
+
               <InputGroup
                 type="number"
                 title="Card serial number"
@@ -60,7 +61,6 @@ export default function CardRegist() {
                 name="cardNumber"
                 maxlength={12}
                 minlength={12}
-                onInput={onInput}
               />
               <InputGroup
                 type="number"
@@ -70,9 +70,8 @@ export default function CardRegist() {
                 name="cvc"
                 maxlength={3}
                 minlength={3}
-                onInput={onInput}
               />
-              <ButtonPrimary>
+              <ButtonPrimary type="submit">
                 Register
               </ButtonPrimary>
             </form>
