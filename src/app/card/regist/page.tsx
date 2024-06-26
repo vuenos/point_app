@@ -56,7 +56,7 @@ export default function CardRegist() {
                 type="number"
                 title="Card serial number"
                 label="Card serial number"
-                placeholder="Input card serial number"
+                placeholder="Input card serial number 12 digits"
                 name="cardNumber"
                 maxlength={12}
                 minlength={12}
@@ -66,7 +66,7 @@ export default function CardRegist() {
                 type="number"
                 title="CVC"
                 label="CVC"
-                placeholder="input CVC"
+                placeholder="input CVC number 3 digits"
                 name="cvc"
                 maxlength={3}
                 minlength={3}
