@@ -1,21 +1,21 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import {FormEvent, useEffect, useState} from "react";
+import {signIn} from "next-auth/react";
+import {useRouter} from "next/navigation";
 import Link from "next/link";
-import { useSession } from 'next-auth/react';
-import { RiGoogleFill } from "react-icons/ri";
-import { RiGithubFill } from "react-icons/ri";
-import { RiKakaoTalkFill } from "react-icons/ri";
-import { BiSolidShow } from 'react-icons/bi';
-import { BiSolidHide } from 'react-icons/bi';
-import { CalloutBox, ButtonPrimary, InputPasswordShow, HorizontalRule } from "@/styles/ComponentStyles";
-import { LinkStyle } from "@/styles/ComponentStyles";
-import { FormSection, InputWithOption, OAuthSection } from "@/styles/FormStyles";
-import { OAuthCallButton } from "@/styles/ComponentStyles";
+import {useSession} from 'next-auth/react';
+import {RiGoogleFill} from "react-icons/ri";
+import {RiGithubFill} from "react-icons/ri";
+import {RiKakaoTalkFill} from "react-icons/ri";
+import {BiSolidShow} from 'react-icons/bi';
+import {BiSolidHide} from 'react-icons/bi';
+import {CalloutBox, ButtonPrimary, InputPasswordShow, HorizontalRule} from "@/styles/ComponentStyles";
+import {LinkStyle} from "@/styles/ComponentStyles";
+import {FormSection, InputWithOption, OAuthSection} from "@/styles/FormStyles";
+import {OAuthCallButton} from "@/styles/ComponentStyles";
 import InputGroup from "@/components/forms/InputGroup";
-import Loading from "@/app/member/login/loading";
+import Loading from "./loading";
 
 const SignIn = () => {
   const [error, setError] = useState("");
@@ -23,7 +23,7 @@ const SignIn = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  const { data: session } = useSession();
+  const {data: session} = useSession();
 
   useEffect(() => {
     if (session?.user) {
@@ -60,7 +60,7 @@ const SignIn = () => {
 
           <form onSubmit={handleSubmit}>
             {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
-            {loading && <Loading />}
+            {loading && <Loading/>}
 
             <InputGroup
               type="email"
@@ -92,35 +92,35 @@ const SignIn = () => {
               Login
             </ButtonPrimary>
 
-            <HorizontalRule />
+            <HorizontalRule/>
 
             <OAuthSection>
               <span className="title">Sign in with: </span>
               <OAuthCallButton
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    signIn("google")
-                  }}>
-                <RiGoogleFill />
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  signIn("google")
+                }}>
+                <RiGoogleFill/>
               </OAuthCallButton>
 
               <OAuthCallButton
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    signIn("github")
-                  }}>
-                <RiGithubFill />
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  signIn("github")
+                }}>
+                <RiGithubFill/>
               </OAuthCallButton>
 
               <OAuthCallButton
-                  type="button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    signIn("kakao")
-                  }}>
-                <RiKakaoTalkFill />
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  signIn("kakao")
+                }}>
+                <RiKakaoTalkFill/>
               </OAuthCallButton>
             </OAuthSection>
 

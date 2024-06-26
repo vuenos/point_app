@@ -1,51 +1,82 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
-import { FormSection } from "@/styles/FormStyles";
+import {FormEvent, useEffect, useState} from "react";
+import {FormSection} from "@/styles/FormStyles";
 import InputGroup from "@/components/forms/InputGroup";
-import { Axios, AxiosError } from "axios";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import axios, {AxiosError} from "axios";
+import {useRouter} from "next/navigation";
+import {useSession} from "next-auth/react";
+import Loading from "@/app/card/regist/loading";
+import {ButtonPrimary, LinkStyle} from "@/styles/ComponentStyles";
 
 export default function CardRegist() {
 
-    const [error, setError] = useState();
-    const { data: session, status } = useSession();
-    const router = useRouter();
-    
-    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+  const [error, setError] = useState();
+  const {data: session, status} = useSession();
+  const router = useRouter();
 
-        try {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-        } catch(error: any) {
-            console.log(error);
-            if (error instanceof AxiosError) {
-                //
-            }
-        }
+    try {
+      const formData = new FormData(event.currentTarget);
+      const cardSaveResponse = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/card`, {
+        cardNumber: formData.get("cardNumber"),
+        cvc: formData.get("cvc"),
+      });
+
+    } catch (error: any) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        const errorMessage = error.response?.data.message;
+        setError(errorMessage);
+      }
     }
+  }
 
-    if(!session) {
-        return <div>Please login</div>
-    } else if (status === "loading") {
-        return <div>Loading...</div>
-    } else {
-        return (
-            <>
-                <h2>Card Regist</h2>
-    
-                <FormSection>
-                    <fieldset>
-                        <legend>Input Card serial</legend>
-    
-                        <form onSubmit={handleSubmit}>
-    
-                        </form>
-                    </fieldset>
-                </FormSection>
-            </>
-        )
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/member/login")
     }
-    
+  }, [status, router]);
+
+  if (status === "authenticated") {
+    return (
+      <>
+        <h2>Card Regist</h2>
+
+        <FormSection>
+          <fieldset>
+            <legend>Input Card serial</legend>
+            <form onSubmit={handleSubmit}>
+              <InputGroup
+                type="number"
+                title="Card serial number"
+                label="Card serial number"
+                placeholder="Input card serial number"
+                name="cardNumber"
+                maxlength={12}
+                minlength={12}
+              />
+              <InputGroup
+                type="number"
+                title="CVC"
+                label="CVC"
+                placeholder="input CVC"
+                name="cvc"
+                maxlength={3}
+                minlength={3}
+              />
+              <ButtonPrimary>
+                Register
+              </ButtonPrimary>
+            </form>
+          </fieldset>
+        </FormSection>
+      </>
+    )
+  } else {
+    return <Loading/>
+  }
+
 }
