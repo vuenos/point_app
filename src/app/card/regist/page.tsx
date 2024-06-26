@@ -8,6 +8,7 @@ import {useRouter} from "next/navigation";
 import {useSession} from "next-auth/react";
 import Loading from "@/app/card/regist/loading";
 import {ButtonPrimary, LinkStyle} from "@/styles/ComponentStyles";
+import onInput from "@/utils/onInput";
 
 export default function CardRegist() {
 
@@ -24,6 +25,8 @@ export default function CardRegist() {
         cardNumber: formData.get("cardNumber"),
         cvc: formData.get("cvc"),
       });
+
+      if (cardSaveResponse) return router.push("/")
 
     } catch (error: any) {
       console.log(error);
@@ -57,6 +60,7 @@ export default function CardRegist() {
                 name="cardNumber"
                 maxlength={12}
                 minlength={12}
+                onInput={onInput}
               />
               <InputGroup
                 type="number"
@@ -66,6 +70,7 @@ export default function CardRegist() {
                 name="cvc"
                 maxlength={3}
                 minlength={3}
+                onInput={onInput}
               />
               <ButtonPrimary>
                 Register

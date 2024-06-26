@@ -35,7 +35,8 @@ export default function InputGroup(props: InputGroupProps) {
     onblur,
     onfocus,
     onkeyup,
-    onkeydown
+    onkeydown,
+    onInput,
   } = props;
 
   return (
@@ -64,6 +65,7 @@ export default function InputGroup(props: InputGroupProps) {
           onblur={onblur}
           onfocus={onfocus}
           onkeyup={onkeyup}
+          onInput={onInput}
           onkeydown={onkeydown}
           maxlength={maxlength}
           minlength={minlength}

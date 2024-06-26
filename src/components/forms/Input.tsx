@@ -20,6 +20,7 @@ export interface InputProps {
   onfocus?: (e: FocusEvent<HTMLInputElement>) => void,
   onkeyup?: (e: KeyboardEvent<HTMLInputElement>) => void,
   onkeydown?: (e: KeyboardEvent<HTMLInputElement>) => void,
+  onInput?: (e: KeyboardEvent<HTMLInputElement>) => void,
 }
 
 export default function Input(props: InputProps) {
@@ -41,7 +42,8 @@ export default function Input(props: InputProps) {
     onblur,
     onfocus,
     onkeyup,
-    onkeydown
+    onkeydown,
+    onInput
   } = props;
 
   return (
@@ -64,6 +66,7 @@ export default function Input(props: InputProps) {
         onFocus={onfocus}
         onKeyUp={onkeyup}
         onKeyDown={onkeydown}
+        onInput={onInput}
       />
     </>
   )
