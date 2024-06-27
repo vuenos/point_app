@@ -47,33 +47,12 @@ export default function CardRegist() {
   if (status === "authenticated") {
     return (
       <>
-        <h2>Card Regist</h2>
 
         <FormSection>
           <fieldset>
-            <legend>Input Card serial</legend>
+            <legend>Card Regist</legend>
             <form onSubmit={handleSubmit}>
               {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
-
-              <InputGroup
-                type="text"
-                title="User email"
-                label="User email"
-                placeholder="User email"
-                name="userEmail"
-                defaultValue={session?.user.email}
-                readonly={true}
-              />
-
-              <InputGroup
-                type="text"
-                title="User name"
-                label="User name"
-                placeholder="User name"
-                name="userName"
-                defaultValue={session?.user.name}
-                readonly={true}
-              />
 
               <InputGroup
                 type="number"
@@ -95,8 +74,27 @@ export default function CardRegist() {
                 minlength={3}
                 onInput={onInput}
               />
+              <InputGroup
+                type="text"
+                title="User email"
+                label="User email"
+                placeholder="User email"
+                name="userEmail"
+                defaultValue={session?.user.email}
+                readonly={true}
+              />
+
+              <InputGroup
+                type="text"
+                title="User name"
+                label="User name"
+                placeholder="User name"
+                name="userName"
+                defaultValue={session?.user.name}
+                readonly={true}
+              />
               <ButtonPrimary type="submit">
-                Register
+                Save Card
               </ButtonPrimary>
             </form>
           </fieldset>

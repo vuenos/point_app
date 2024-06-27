@@ -1,15 +1,15 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import {FormEvent, useEffect, useState} from "react";
+import axios, {AxiosError} from "axios";
+import {signIn, useSession} from "next-auth/react";
+import {useRouter} from "next/navigation";
 import Link from "next/link";
 import {FormSection, InputWithLabel, InputWithOption, OAuthSection} from "@/styles/FormStyles";
 import InputGroup from "@/components/forms/InputGroup";
-import { BiLogoGoogle } from 'react-icons/bi';
-import { BiSolidShow } from 'react-icons/bi';
-import { BiSolidHide } from 'react-icons/bi';
+import {BiLogoGoogle} from 'react-icons/bi';
+import {BiSolidShow} from 'react-icons/bi';
+import {BiSolidHide} from 'react-icons/bi';
 import {
   ButtonPrimary,
   CalloutBox,
@@ -24,7 +24,7 @@ const Signup = () => {
   const [error, setError] = useState();
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-  const { data: session } = useSession();
+  const {data: session} = useSession();
 
   const labelStyles = "w-full text-sm";
 
@@ -62,11 +62,10 @@ const Signup = () => {
 
   return (
     <>
-      <h2>Sign Up</h2>
 
       <FormSection>
         <fieldset>
-          <legend>Input Your Info</legend>
+          <legend>Sign Up</legend>
 
           <form onSubmit={handleSubmit}>
             {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
@@ -110,7 +109,7 @@ const Signup = () => {
               Sign Up
             </ButtonPrimary>
 
-            <HorizontalRule />
+            <HorizontalRule/>
 
             <OAuthSection>
               <span className="title">Sign in with: </span>
@@ -120,7 +119,7 @@ const Signup = () => {
                   e.preventDefault();
                   signIn("google")
                 }}>
-                <RiGoogleFill />
+                <RiGoogleFill/>
               </OAuthCallButton>
 
               <OAuthCallButton
@@ -129,7 +128,7 @@ const Signup = () => {
                   e.preventDefault();
                   signIn("github")
                 }}>
-                <RiGithubFill />
+                <RiGithubFill/>
               </OAuthCallButton>
 
               <OAuthCallButton
@@ -138,7 +137,7 @@ const Signup = () => {
                   e.preventDefault();
                   signIn("kakao")
                 }}>
-                <RiKakaoTalkFill />
+                <RiKakaoTalkFill/>
               </OAuthCallButton>
             </OAuthSection>
 

@@ -52,11 +52,10 @@ const SignIn = () => {
 
   return (
     <>
-      <h2>Sign In</h2>
 
       <FormSection>
         <fieldset>
-          <legend>Input Credentials Info</legend>
+          <legend>Sign In</legend>
 
           <form onSubmit={handleSubmit}>
             {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}

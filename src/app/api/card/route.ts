@@ -12,7 +12,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     if (!cardNumber || !cvc) {
       return NextResponse.json(
-        {message: "Card number and CVC are required"},
+        {message: "Card number and CVC Number is required"},
         {status: 400},
       );
     }
@@ -42,7 +42,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         {status: 400},
       );
     } else {
-      return new NextResponse("Database Error", {status: 500});
+      return new NextResponse("Server Error", {status: 500});
     }
   }
 }
