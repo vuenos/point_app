@@ -5,6 +5,7 @@ interface PointCard extends Document {
   cvc: number;
   userEmail: string,
   userName: string,
+  userId: string,
 }
 
 const cardSchema: Schema = new Schema({
@@ -23,6 +24,10 @@ const cardSchema: Schema = new Schema({
       required: true
     },
     userName: {
+      type: String,
+      required: true
+    },
+    userId: {
       type: String,
       required: true
     },

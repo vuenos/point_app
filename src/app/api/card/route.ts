@@ -8,7 +8,7 @@ export async function POST(req: NextRequest) {
   try {
     await connectDB();
 
-    const {cardNumber, cvc, userEmail, userName} = await req.json();
+    const {cardNumber, cvc, userEmail, userName, userId} = await req.json();
 
     if (!cardNumber || !cvc) {
       return NextResponse.json(
@@ -22,6 +22,7 @@ export async function POST(req: NextRequest) {
       cvc,
       userEmail,
       userName,
+      userId,
     });
 
     const saveCard = await newCard.save();
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
         cvc: saveCard.cvc,
         email: saveCard.userEmail,
         name: saveCard.userName,
+        id: saveCard.userId,
       },
       {status: 201}
     );
