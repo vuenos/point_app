@@ -3,8 +3,8 @@ import mongoose, {Schema, Document, Model} from "mongoose";
 interface PointCard extends Document {
   cardNumber: number;
   cvc: number;
-  // userEmail: string,
-  // userName: string,
+  userEmail: string,
+  userName: string,
 }
 
 const cardSchema: Schema = new Schema({
@@ -18,14 +18,14 @@ const cardSchema: Schema = new Schema({
       unique: false,
       required: [true, "CVC number is required"],
     },
-    // userEmail: {
-    //   type: String,
-    //   required: true
-    // },
-    // userName: {
-    //   type: String,
-    //   required: true
-    // },
+    userEmail: {
+      type: String,
+      required: true
+    },
+    userName: {
+      type: String,
+      required: true
+    },
   },
   {
     timestamps: true,

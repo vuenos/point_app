@@ -8,7 +8,7 @@ import {useRouter} from "next/navigation";
 import {useSession} from "next-auth/react";
 import Loading from "@/app/card/regist/loading";
 import {ButtonPrimary, CalloutBox, LinkStyle} from "@/styles/ComponentStyles";
-// import onInput from "@/utils/onInput";
+import onInput from "@/utils/onInput";
 
 export default function CardRegist() {
 
@@ -30,6 +30,8 @@ export default function CardRegist() {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/card`, {
         cardNumber: formData.get("cardNumber"),
         cvc: formData.get("cvc"),
+        userEmail: formData.get("userEmail"),
+        userName: formData.get("userName"),
       });
       console.log(res.data)
 
@@ -51,7 +53,27 @@ export default function CardRegist() {
           <fieldset>
             <legend>Input Card serial</legend>
             <form onSubmit={handleSubmit}>
-              {/*{error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}*/}
+              {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
+
+              <InputGroup
+                type="text"
+                title="User email"
+                label="User email"
+                placeholder="User email"
+                name="userEmail"
+                defaultValue={session?.user.email}
+                readonly={true}
+              />
+
+              <InputGroup
+                type="text"
+                title="User name"
+                label="User name"
+                placeholder="User name"
+                name="userName"
+                defaultValue={session?.user.name}
+                readonly={true}
+              />
 
               <InputGroup
                 type="number"
@@ -61,6 +83,7 @@ export default function CardRegist() {
                 name="cardNumber"
                 maxlength={12}
                 minlength={12}
+                onInput={onInput}
               />
               <InputGroup
                 type="number"
@@ -70,6 +93,7 @@ export default function CardRegist() {
                 name="cvc"
                 maxlength={3}
                 minlength={3}
+                onInput={onInput}
               />
               <ButtonPrimary type="submit">
                 Register
