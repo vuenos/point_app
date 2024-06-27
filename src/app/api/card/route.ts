@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import Card from "@/models/cardModel";
 import {connectDB} from "@/utils/connectMongDB";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
 
   try {
     await connectDB();
