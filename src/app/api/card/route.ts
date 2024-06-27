@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 import Card from "@/models/cardModel";
 import {connectDB} from "@/utils/connectMongDB";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
 
   try {
     await connectDB();
 
-    const {cardNumber, cvc, userEmail, userName} = await req.json();
+    const {cardNumber, cvc, userEmail, userName, userId} = await req.json();
 
     if (!cardNumber || !cvc) {
       return NextResponse.json(
@@ -22,6 +22,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       cvc,
       userEmail,
       userName,
+      userId,
     });
 
     const saveCard = await newCard.save();
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         cvc: saveCard.cvc,
         email: saveCard.userEmail,
         name: saveCard.userName,
+        id: saveCard.userId,
       },
       {status: 201}
     );

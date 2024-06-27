@@ -32,6 +32,7 @@ export default function CardRegist() {
         cvc: formData.get("cvc"),
         userEmail: formData.get("userEmail"),
         userName: formData.get("userName"),
+        userId: formData.get("userId"),
       });
       console.log(res.data)
 
@@ -83,7 +84,6 @@ export default function CardRegist() {
                 defaultValue={session?.user.email}
                 readonly={true}
               />
-
               <InputGroup
                 type="text"
                 title="User name"
@@ -91,6 +91,12 @@ export default function CardRegist() {
                 placeholder="User name"
                 name="userName"
                 defaultValue={session?.user.name}
+                readonly={true}
+              />
+              <InputGroup
+                type="text"
+                name="userId"
+                defaultValue={session?.user._id}
                 readonly={true}
               />
               <ButtonPrimary type="submit">
