@@ -45,11 +45,11 @@ const OAuthCallButton = styled.button`
     border-radius: 8px;
     font-size: 20px;
     color: #727272;
-    
+
     svg {
         color: #000;
     }
-    
+
     &:hover svg {
         color: #999;
         transition: all 0.3s;
@@ -91,7 +91,7 @@ const LogoutButton = styled.button`
     letter-spacing: 0;
     color: #000000 !important;
     font-weight: 700;
-    
+
     &:hover {
         opacity: 0.6;
         transition: all 0.3s;
@@ -124,31 +124,32 @@ const CalloutBox = styled.div`
     font-size: 0.875rem;
     line-height: 1.43;
     letter-spacing: 0.01071em;
+    margin-bottom: 16px;
     padding: 6px 16px;
     color: rgb(1, 67, 97);
     background-color: rgb(229, 246, 253);
 
-        .title {
-            margin: -2px 0px 0.35em;
-            font-family: Roboto, Helvetica, Arial, sans-serif;
-            font-size: 1rem;
-            line-height: 1.5;
-            letter-spacing: 0.00938em;
-            font-weight: 700;
-        }
+    .title {
+        margin: -2px 0px 0.35em;
+        font-family: Roboto, Helvetica, Arial, sans-serif;
+        font-size: 1rem;
+        line-height: 1.5;
+        letter-spacing: 0.00938em;
+        font-weight: 700;
+    }
 
-        &.error {
-            color: rgb(95, 33, 32);
-            background-color: rgb(253, 237, 237);
-        }
+    &.error {
+        color: rgb(95, 33, 32);
+        background-color: rgb(253, 237, 237);
+    }
 `;
 
 const InputPasswordShow = styled.button`
     width: 32px;
     height: 32px;
-    
+
     &:hover {
-        
+
     }
 `;
 
@@ -160,24 +161,24 @@ const HorizontalRule = styled.hr`
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 `;
 
-const LinkStyle = styled.a.attrs<{$scroll?: {}}>(props =>({
-    $scroll : props.$scroll || `{false}`
+const LinkStyle = styled.a.attrs<{ $scroll?: {} }>(props => ({
+  $scroll: props.$scroll || `{false}`
 }))`
     color: #1724a3;
     text-decoration: underline;
-    
+
     &:link {
         text-decoration: underline;
     }
 `;
 
 const loadingAnimation = keyframes`
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
 `;
 
 const SkeletonSpan = styled.span<{ width: string, height: string, margin: string }>`
