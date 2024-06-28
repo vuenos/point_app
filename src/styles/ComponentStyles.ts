@@ -61,12 +61,11 @@ const UserNameButton = styled.button`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 68px;
+    width: 32px;
     height: 32px;
     border: 1px solid #cecece;
-    border-radius: 8px;
+    border-radius: 100%;
     margin-left: 16px;
-    padding: 0 8px;
     font-size: 13px;
     letter-spacing: -0.064em;
     color: #FFFFFF !important;
@@ -76,6 +75,10 @@ const UserNameButton = styled.button`
     &:hover {
         opacity: 0.8;
         transition: all 0.3s;
+    }
+
+    span {
+        text-transform: uppercase;
     }
 `;
 
@@ -181,7 +184,7 @@ const loadingAnimation = keyframes`
     }
 `;
 
-const SkeletonSpan = styled.span<{ width: string, height: string, margin: string }>`
+const SkeletonSpan = styled.span<{ width: string, height: string, margin: string, borderRadius?: string }>`
     display: block;
     background: linear-gradient(90deg, #DADADA, #f5f5f5, #DADADA);
     background-size: 200% 100%;
@@ -189,7 +192,7 @@ const SkeletonSpan = styled.span<{ width: string, height: string, margin: string
     width: ${props => props.width};
     height: ${props => props.height};
     margin: ${props => props.margin};
-    border-radius: 8px;
+    border-radius: ${props => props.borderRadius ? props.borderRadius : "8px"};
 `;
 
 export {
