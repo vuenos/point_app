@@ -35,7 +35,7 @@ export default function Header() {
           >
             {(session?.user.image)
               ? <img src={session.user.image} alt={session.user.name} width="100%"/>
-              : <span>{(session?.user.name).slice(0, 1)}</span>
+              : <span>{(session?.user.name) ? (session?.user.name).substring(0, 1) : "U"}</span>
             }
           </UserNameButton>
           <LogoutButton
@@ -51,7 +51,7 @@ export default function Header() {
     } else if (status === "loading") {
       return (
         <>
-          <SkeletonSpan width="68px" height="32px" margin="0 0 0 16px"/>
+          <SkeletonSpan width="32px" height="32px" margin="0 0 0 16px" border-radius="100%"/>
           <SkeletonSpan width="64px" height="32px" margin="0 0 0 16px"/>
         </>
       )

@@ -184,7 +184,7 @@ const loadingAnimation = keyframes`
     }
 `;
 
-const SkeletonSpan = styled.span<{ width: string, height: string, margin: string }>`
+const SkeletonSpan = styled.span<{ width: string, height: string, margin: string, borderRadius?: string }>`
     display: block;
     background: linear-gradient(90deg, #DADADA, #f5f5f5, #DADADA);
     background-size: 200% 100%;
@@ -192,7 +192,7 @@ const SkeletonSpan = styled.span<{ width: string, height: string, margin: string
     width: ${props => props.width};
     height: ${props => props.height};
     margin: ${props => props.margin};
-    border-radius: 8px;
+    border-radius: ${props => props.borderRadius ? props.borderRadius : "8px"};
 `;
 
 export {
