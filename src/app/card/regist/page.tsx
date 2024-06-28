@@ -15,6 +15,10 @@ export default function CardRegist() {
   const [error, setError] = useState();
   const {data: session, status} = useSession();
   const router = useRouter();
+  const [formData, setFormData] = useState({
+    cardNumber: "",
+    cvc: "",
+  });
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -45,6 +49,17 @@ export default function CardRegist() {
     }
   }
 
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    // 정규식을 사용하여 숫자만 허용
+    if (/^\d*$/.test(value)) {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
+  };
+
   if (status === "authenticated") {
     return (
       <>
@@ -56,21 +71,25 @@ export default function CardRegist() {
               {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
 
               <InputGroup
-                type="number"
+                type="text"
                 title="Card serial number"
                 label="Card serial number"
                 placeholder="Input card serial number 12 digits"
                 name="cardNumber"
+                value={formData.cardNumber}
                 maxlength={12}
                 minlength={12}
+                onchange={handleChange}
                 onInput={onInput}
               />
               <InputGroup
-                type="number"
+                type="text"
                 title="CVC"
                 label="CVC"
                 placeholder="input CVC number 3 digits"
                 name="cvc"
+                value={formData.cvc}
+                onchange={handleChange}
                 maxlength={3}
                 minlength={3}
                 onInput={onInput}
