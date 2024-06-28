@@ -30,10 +30,13 @@ export default function Header() {
     if (status === "authenticated") {
       return (
         <>
-          <UserNameButton 
+          <UserNameButton
             onClick={handleUserClick}
           >
-            {session.user.name}
+            {(session?.user.image)
+              ? <img src={session.user.image} alt={session.user.name} width="100%"/>
+              : <span>{(session?.user.name).slice(0, 1)}</span>
+            }
           </UserNameButton>
           <LogoutButton
             type="button"
@@ -41,8 +44,8 @@ export default function Header() {
               signOut();
             }}
           >
-          Log Out
-        </LogoutButton>
+            Log Out
+          </LogoutButton>
         </>
       )
     } else if (status === "loading") {

@@ -61,12 +61,11 @@ const UserNameButton = styled.button`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 68px;
+    width: 32px;
     height: 32px;
     border: 1px solid #cecece;
-    border-radius: 8px;
+    border-radius: 100%;
     margin-left: 16px;
-    padding: 0 8px;
     font-size: 13px;
     letter-spacing: -0.064em;
     color: #FFFFFF !important;
@@ -76,6 +75,10 @@ const UserNameButton = styled.button`
     &:hover {
         opacity: 0.8;
         transition: all 0.3s;
+    }
+
+    span {
+        text-transform: uppercase;
     }
 `;
 
