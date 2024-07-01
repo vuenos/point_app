@@ -20,6 +20,12 @@ with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/
 
 ## ⏳ History
 
+### 📆 June 28, 2024
+
+#### session 정보 특정하기
+
+- session 의 user 정보 중 _id 값이 필요했다.
+
 ### 📆 June 21, 2024
 
 ### 카드 등록 기능
