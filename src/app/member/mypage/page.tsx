@@ -47,8 +47,8 @@ export default function Mypage() {
                 </>
             ) : (
                 <ul>
-                    {cards.map((card) => (
-                        <li key={card._id}>
+                    {cards.map((card, index) => (
+                        <li key={index}>
                             {card.cardNumber}
                         </li>
                     ))}
