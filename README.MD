@@ -20,6 +20,58 @@ with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/
 
 ## ⏳ History
 
+### 📆 Jul 03, 2024
+#### 유저가 등록한 카드 정보 가져오기
+- 유저가 카드 등록시 유저정보(userEmail, userName, userId)가 기본적으로 같이 등록됨.
+- 로그인 session 정보 중 user._id 값으로 카드의 userId 값을 특정하여 자신이 등록한 카드를 특정할 수 있음.
+- 백엔드 api에서는 현재 session의 user._id 값을 userId (cardModel schema)에 대입해서 db로의 쿼리 요청을 하게 됨.
+```javascript
+const cards = await Card.find({ userId: session?.user._id });
+```
+- 여기서 session 정보를 매칭하지 않고 ```Card.find({ })``` 빈 값으로 쿼리하면 모든 카드정보가 호출 된다.
+- 서버사이드 에서 현재 session 정보가 있을때 db를 조회해서 userId 값을 가져와야 할 것이다.
+#### 1차 시도
+- api/mypage/route.ts 생성
+- db Schema 는 cardModel 을 그대로 사용.
+```javascript
+import {useSession} from "next-auth/react";
+
+const {data: session, status} = useSession();
+
+try {
+    await connectDB();
+    const cards = await Card.find({ userId: session?.user._id });
+    return NextResponse.json(cards, { status: 200 });
+}
+```
+- 결과는 ```Internal Server Error 500``` 실패
+- api의 endpoint 는 문제가 없고, 아마도 session 을 가져오지 못하거나 user._id 를 가져오지 못하여 DB 쿼리가 안된것일듯?
+- ```Card.find({ })``` 와 같이 빈값으로 호출해봐도 역시 500에러. session 을 취득하는 코드에 문제가 있는듯 하다. session 코드를 지우고 모든값 호출시 모든 카드 정보가 호출됨.
+
+#### 2차 시도
+- https://next-auth.js.org/tutorials/securing-pages-and-api-routes
+- nextauth 공식사이트에 서버사이드에서의 세션취득 관련글이 있다.
+- 1차 시도 방법은 프론트에서의 적용방법 이었음.
+- ```getServerSession``` 메쏘드를 이용해서 api 경로를 보호할 수 있다라는 내용.
+```javascript
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/libs/auth";
+
+const session = await getServerSession(req, res, authOptions);
+
+if(session) {
+    const cards = await Card.find({ userId: session?.user._id });
+    return NextResponse.json(
+        cards,
+        { status: 200 }
+    );
+} else {
+    res.status(401);
+}
+```
+- 결과는 ```Internal Server Error 500``` 실패
+
+
 ### 📆 June 28, 2024
 
 #### session 정보 특정하기
