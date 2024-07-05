@@ -14,9 +14,6 @@ export default function Mypage() {
     const router = useRouter();
 
     const getUserCards = async () => {
-        if (status === "unauthenticated") {
-            router.push("/member/login");
-        }
 
         try {
             const res = await axios.get(`${process.env.NEXT_PUBLIC_APP_URL}/api/mypage`);
@@ -33,11 +30,17 @@ export default function Mypage() {
         }
     };
 
+    useEffect(() => {        
+        if (status === "unauthenticated") {
+            router.push("/member/login");
+        }
+    }, [status]);
+
     useEffect(() => {
         if (session) {
             getUserCards();
         }
-    }, [session])
+    }, [session]);
 
     return (
         <>
