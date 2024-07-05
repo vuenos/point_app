@@ -34,12 +34,14 @@ export default function Mypage() {
     };
 
     useEffect(() => {
-        getUserCards();
-    }, [status])
+        if (session) {
+            getUserCards();
+        }
+    }, [session])
 
     return (
         <>
-            <h2>My page</h2>
+            <h2>My page <sup>{session?.user._id}</sup></h2>
             {cards.length === 0 ? (
                 <>
                     {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
@@ -47,9 +49,12 @@ export default function Mypage() {
                 </>
             ) : (
                 <ul>
-                    {cards.map((card, index) => (
-                        <li key={index}>
-                            {card.cardNumber}
+                    {cards.map((card) => (
+                        <li key={card._id}>
+                            <div>{card.cardNumber}</div>
+                            <div>{card.cvc}</div>
+                            <div>{card.createdAt.slice(0, 10, "")}</div>
+                            <div>{card.userId}</div>
                         </li>
                     ))}
                 </ul>
