@@ -3,6 +3,8 @@
 import React from 'react';
 import {UserDialogStyle} from '@/styles/HeaderStyles';
 import {RiCloseLine} from "react-icons/ri";
+import {RiAccountPinCircleLine} from "react-icons/ri";
+import {RiAtLine} from "react-icons/ri";
 import Link from 'next/link';
 
 interface UserDialogProps {
@@ -18,8 +20,8 @@ const UserDialog: React.FC<UserDialogProps> = ({isOpen, onClose, user}) => {
     <UserDialogStyle>
       <div className="user-info-wrap">
         <ul className="info-list">
-          <li>{user.email}</li>
-          <li>{user.name}</li>
+          <li><RiAccountPinCircleLine/> <a href="/member/mypage">{user.name}</a></li>
+          <li className="user-email"><RiAtLine/> {user.email}</li>
         </ul>
 
         <ul className="user-features">

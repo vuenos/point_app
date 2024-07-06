@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import {styled} from "styled-components";
 
 const HeaderSection = styled.div`
     position: fixed;
@@ -22,7 +22,7 @@ const HeaderSection = styled.div`
         align-items: center;
         width: 48px;
         height: 48px;
-        background: linear-gradient(45deg, rgba(203,33,189,1) 0%, rgba(92,30,237,1) 100%);
+        background: linear-gradient(45deg, rgba(203, 33, 189, 1) 0%, rgba(92, 30, 237, 1) 100%);
         text-align: center;
         color: #ffffff;
         border-radius: 100%;
@@ -48,12 +48,12 @@ const HeaderSection = styled.div`
             &:hover {
                 color: #1a1a1a;
             }
-            
+
             &.active {
                 font-weight: 700;
                 color: #000000;
             }
-            
+
             svg {
                 margin-right: 4px;
             }
@@ -80,7 +80,7 @@ const StandAloneHeaderSection = styled.div`
         align-items: center;
         width: 32px;
         height: 32px;
-        background: linear-gradient(45deg, rgba(203,33,189,1) 0%, rgba(92,30,237,1) 100%);
+        background: linear-gradient(45deg, rgba(203, 33, 189, 1) 0%, rgba(92, 30, 237, 1) 100%);
         text-align: center;
         color: #ffffff;
         font-size: 0.7rem;
@@ -107,13 +107,13 @@ const StandAloneHeaderSection = styled.div`
             &:hover {
                 color: #1a1a1a;
             }
-            
+
             &.active {
                 font-weight: 700;
                 color: #000000;
                 letter-spacing: -0.024em;
             }
-            
+
             svg {
                 margin-right: 4px;
             }
@@ -122,11 +122,10 @@ const StandAloneHeaderSection = styled.div`
 `;
 
 const UserDialogStyle = styled.div`
-overflow: hidden;
+    overflow: hidden;
     position: fixed;
     top: 56px;
-    width: 200px;
-    height: 200px;
+    width: 320px;
     border: 1px solid #cecece;
     border-radius: 12px;
     background-color: #FFFFFF;
@@ -143,8 +142,30 @@ overflow: hidden;
             padding: 16px 16px 8px 16px;
 
             li {
+                display: flex;
+                align-items: center;
                 margin-top: 8px;
-                color: #727272;
+                color: #929292;
+                font-size: 13px;
+                word-break: break-word;
+                letter-spacing: -0.024em;
+
+                svg {
+                    margin-right: 4px;
+                    font-size: 18px;
+                }
+
+                a {
+                    margin: 0 0;
+                    line-height: 1.4;
+                    font-size: 13px;
+                    letter-spacing: -0.024em;
+                    color: #929292;
+
+                    &:hover {
+                        color: #cb21bd;
+                    }
+                }
             }
         }
 
@@ -175,7 +196,7 @@ overflow: hidden;
 `;
 
 export {
-    HeaderSection,
-    StandAloneHeaderSection,
-    UserDialogStyle
+  HeaderSection,
+  StandAloneHeaderSection,
+  UserDialogStyle
 }
