@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { CalloutBox } from "@/styles/ComponentStyles";
+import { CalloutBox, CardList } from "@/styles/ComponentStyles";
 
 
 export default function Mypage() {
@@ -51,7 +51,7 @@ export default function Mypage() {
                     <div>No cards found</div>
                 </>
             ) : (
-                <ul>
+                <CardList>
                     {cards.map((card) => (
                         <li key={card._id}>
                             <div>{card.cardNumber}</div>
@@ -60,7 +60,7 @@ export default function Mypage() {
                             <div>{card.userId}</div>
                         </li>
                     ))}
-                </ul>
+                </CardList>
             )}
         </>
     );

@@ -184,6 +184,24 @@ const loadingAnimation = keyframes`
     }
 `;
 
+const CardList = styled.ul`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+
+    li {
+        flex: 0 1 calc(50% - 12px);
+        width: calc(50% - 12px);
+        max-width: 320px;
+        min-width: 280px;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        padding: 16px;
+    }
+`;
+
 const SkeletonSpan = styled.span<{ width: string, height: string, margin: string, borderRadius?: string }>`
     display: block;
     background: linear-gradient(90deg, #DADADA, #f5f5f5, #DADADA);
@@ -207,4 +225,5 @@ export {
   HorizontalRule,
   LinkStyle,
   SkeletonSpan,
+  CardList,
 }
