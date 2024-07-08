@@ -189,16 +189,30 @@ const CardList = styled.ul`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 24px;
+    gap: 40px;
+    max-width: 640px;
+    margin: 40px auto 0 auto;
 
     li {
-        flex: 0 1 calc(50% - 12px);
-        width: calc(50% - 12px);
-        max-width: 320px;
-        min-width: 280px;
+        flex: 0 1 160px;
+        width: 160px;
+        height: 240px;
         border: 1px solid #ccc;
         border-radius: 12px;
         padding: 16px;
+        word-break: break-all;
+        font-size: 14px;
+        color: #727272;
+        letter-spacing: -0.064em;
+
+        * {
+            letter-spacing: -0.044em;
+        }
+
+        .user-id {
+            font-size: 11px;
+            color: #cdcdcd;
+        }
     }
 `;
 
