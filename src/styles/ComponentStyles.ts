@@ -1,7 +1,6 @@
 "use client";
 
 import {keyframes, styled} from "styled-components";
-import {string} from "prop-types";
 
 const ButtonPrimary = styled.button`
     display: inline-block;
@@ -190,14 +189,14 @@ const CardList = styled.ul`
     align-items: center;
     flex-wrap: wrap;
     gap: 40px;
-    max-width: 640px;
+    max-width: 860px;
     margin: 40px auto 0 auto;
 
     li {
-        flex: 0 1 160px;
-        width: 160px;
-        height: 240px;
-        border: 1px solid #ccc;
+        flex: 0 1 240px;
+        width: 240px;
+        height: 360px;
+        border: 2px solid #cb21bd;
         border-radius: 12px;
         padding: 16px;
         word-break: break-all;
@@ -211,7 +210,48 @@ const CardList = styled.ul`
 
         .user-id {
             font-size: 11px;
-            color: #cdcdcd;
+            color: #dadada;
+        }
+
+        .card-number {
+            display: flex;
+            justify-content: space-between;
+            font-size: 44px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+            color: #5c1eed;
+
+            span {
+                flex: 0 1 50%;
+                width: 50%;
+            }
+        }
+
+        .meta-data {
+            margin-top: 32px;
+            color: #cb21bd;
+
+            span {
+                display: inline-block;
+                margin-right: 16px;
+            }
+
+            sup {
+                padding-right: 6px;
+                font-size: 10px;
+                color: #999;
+            }
+        }
+
+        .user-name {
+            margin-top: 32px;
+            font-size: 24px;
+
+            sup {
+                padding-right: 6px;
+                font-size: 10px;
+                color: #999;
+            }
         }
     }
 `;

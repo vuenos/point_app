@@ -5,6 +5,9 @@ import {useSession} from "next-auth/react";
 import axios, {AxiosError} from "axios";
 import {useRouter} from "next/navigation";
 import {CalloutBox, CardList} from "@/styles/ComponentStyles";
+import {Playfair_Display} from "next/font/google";
+
+const playfair = Playfair_Display({subsets: ["latin"]});
 
 
 export default function Mypage() {
@@ -56,7 +59,11 @@ export default function Mypage() {
           {cards.map((card) => (
             <li key={card._id}>
               <div className="user-id">{card.userId}</div>
-              <div className="card-number">{card.cardNumber}</div>
+              <div className={`card-number ${playfair.className}`}>
+                <span>{card.cardNumber.toString().slice(0, 4)}</span>
+                <span>{card.cardNumber.toString().slice(4, 8)}</span>
+                <span>{card.cardNumber.toString().slice(8, 12)}</span>
+              </div>
               <div className="meta-data">
                 <span>
                   <sup>DATE</sup>
@@ -67,7 +74,10 @@ export default function Mypage() {
                   {card.cvc}
                 </span>
               </div>
-              <div className="user-name">{card.userName}</div>
+              <div className="user-name">
+                <sup>NAME</sup>
+                {card.userName}
+              </div>
             </li>
           ))}
         </CardList>
