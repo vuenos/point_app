@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import axios, {AxiosError} from "axios";
 import {useRouter} from "next/navigation";
-import {CalloutBox, CardList} from "@/styles/ComponentStyles";
+import {CalloutBox, CardList, SkeletonSpan} from "@/styles/ComponentStyles";
 import {MyId} from "@/styles/MypageStyles";
 import {Playfair_Display} from "next/font/google";
 
@@ -45,6 +45,20 @@ export default function Mypage() {
       getUserCards();
     }
   }, [session]);
+
+  if (status === "loading") {
+    return (
+      <>
+        <h2>My page</h2>
+        <CardList>
+          <li>
+            <SkeletonSpan width="140px" height="16px" margin="0 0 0 0" border-radius="8px"/>
+            <SkeletonSpan width="100px" height="32px" margin="40px 0 0 0" border-radius="8px"/>
+          </li>
+        </CardList>
+      </>
+    )
+  }
 
   return (
     <>
