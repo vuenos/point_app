@@ -5,6 +5,7 @@ import {useSession} from "next-auth/react";
 import axios, {AxiosError} from "axios";
 import {useRouter} from "next/navigation";
 import {CalloutBox, CardList} from "@/styles/ComponentStyles";
+import {MyId} from "@/styles/MypageStyles";
 import {Playfair_Display} from "next/font/google";
 
 const playfair = Playfair_Display({subsets: ["latin"]});
@@ -48,7 +49,7 @@ export default function Mypage() {
   return (
     <>
       <h2>My page</h2>
-      <div>{session?.user._id}</div>
+      <MyId>{session?.user._id}</MyId>
       {cards.length === 0 ? (
         <>
           {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
