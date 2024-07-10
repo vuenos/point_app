@@ -5,11 +5,6 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/libs/auth";
 
 export async function GET(req, res) {
-  // return NextResponse.json([
-  //     {cardNumber: "983264923874932"},
-  //     {cardNumber: "222222"}
-  // ])
-
   const session = await getServerSession(authOptions);
 
   try {

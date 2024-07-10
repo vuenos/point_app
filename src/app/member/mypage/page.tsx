@@ -4,8 +4,11 @@ import {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
 import axios, {AxiosError} from "axios";
 import {useRouter} from "next/navigation";
-import {CalloutBox} from "@/styles/ComponentStyles";
+import {CalloutBox, CardList, SkeletonSpan} from "@/styles/ComponentStyles";
+import {MyId} from "@/styles/MypageStyles";
+import {Playfair_Display} from "next/font/google";
 
+const playfair = Playfair_Display({subsets: ["latin"]});
 
 export default function Mypage() {
   const [cards, setCards] = useState([]);
@@ -42,25 +45,56 @@ export default function Mypage() {
     }
   }, [session]);
 
+  if (status === "loading") {
+    return (
+      <>
+        <h2>My page</h2>
+        <CardList>
+          <li>
+            <SkeletonSpan width="140px" height="16px" margin="0 0 0 0" border-radius="8px"/>
+            <SkeletonSpan width="100px" height="32px" margin="40px 0 0 0" border-radius="8px"/>
+          </li>
+        </CardList>
+      </>
+    )
+  }
+
   return (
     <>
-      <h2>My page <sup>{session?.user._id}</sup></h2>
+      <h2>My page</h2>
+      <MyId>{session?.user._id}</MyId>
       {cards.length === 0 ? (
         <>
           {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
           <div>No cards found</div>
         </>
       ) : (
-        <ul>
+        <CardList>
           {cards.map((card) => (
             <li key={card._id}>
-              <div>{card.cardNumber}</div>
-              <div>{card.cvc}</div>
-              <div>{card.createdAt.slice(0, 10, "")}</div>
-              <div>{card.userId}</div>
+              <div className="user-id">{card.userId}</div>
+              <div className={`card-number ${playfair.className}`}>
+                <span>{card.cardNumber.toString().slice(0, 4)}</span>
+                <span>{card.cardNumber.toString().slice(4, 8)}</span>
+                <span>{card.cardNumber.toString().slice(8, 12)}</span>
+              </div>
+              <div className="meta-data">
+                <span>
+                  <sup>DATE</sup>
+                  {card.createdAt.slice(5, 10, "").replaceAll("-", "/")}
+                </span>
+                <span>
+                  <sup>CVC</sup>
+                  {card.cvc}
+                </span>
+              </div>
+              <div className="user-name">
+                <sup>NAME</sup>
+                {card.userName}
+              </div>
             </li>
           ))}
-        </ul>
+        </CardList>
       )}
     </>
   );
