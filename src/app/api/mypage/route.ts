@@ -5,7 +5,6 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/libs/auth";
 
 export async function GET(req, res) {
-
   const session = await getServerSession(authOptions);
 
   try {
