@@ -256,8 +256,8 @@ const CardList = styled.ul`
     }
 `;
 
-const SkeletonSpan = styled.span<{ width: string, height: string, margin: string, borderRadius?: string }>`
-    display: block;
+const SkeletonSpan = styled.span<{ display?: string, width: string, height: string, margin: string, borderRadius?: string }>`
+    display: ${props => props.display ? props.display : "block"};
     background: linear-gradient(90deg, #DADADA, #f5f5f5, #DADADA);
     background-size: 200% 100%;
     animation: ${loadingAnimation} 1.5s infinite;
