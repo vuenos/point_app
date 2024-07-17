@@ -13,6 +13,7 @@ import onInput from "@/utils/onInput";
 export default function CardRegist() {
 
   const [error, setError] = useState();
+  const [saveDisabled, setSaveDisabled] = useState<boolean>(false);
   const {data: session, status} = useSession();
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -30,6 +31,7 @@ export default function CardRegist() {
     event.preventDefault();
 
     try {
+      setSaveDisabled(true);
       const formData = new FormData(event.currentTarget);
       const res = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/card`, {
         cardNumber: formData.get("cardNumber"),
@@ -42,6 +44,7 @@ export default function CardRegist() {
 
     } catch (error) {
       console.log(error.message);
+      setSaveDisabled(false);
       if (error instanceof AxiosError) {
         const errorMessage = error.response?.data.message;
         setError(errorMessage);
@@ -118,7 +121,7 @@ export default function CardRegist() {
                 defaultValue={session?.user._id}
                 readonly={true}
               />
-              <ButtonPrimary type="submit">
+              <ButtonPrimary type="submit" disabled={saveDisabled}>
                 Save Card
               </ButtonPrimary>
             </form>
