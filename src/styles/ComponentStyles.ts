@@ -11,6 +11,10 @@ const ButtonPrimary = styled.button`
     line-height: 40px;
     color: #ffffff;
     background: linear-gradient(45deg, rgba(203, 33, 189, 1) 0%, rgba(92, 30, 237, 1) 100%);
+
+    &:disabled {
+        opacity: 0.5;
+    }
 `;
 
 const ButtonBackToPage = styled.button`

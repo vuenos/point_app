@@ -29,9 +29,9 @@ export default function CardRegist() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSaveDisabled(true);
 
     try {
-      setSaveDisabled(true);
       const formData = new FormData(event.currentTarget);
       const res = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/card`, {
         cardNumber: formData.get("cardNumber"),
@@ -49,6 +49,12 @@ export default function CardRegist() {
         const errorMessage = error.response?.data.message;
         setError(errorMessage);
       }
+    } finally {
+      setSaveDisabled(false);
+      setFormData({
+        cardNumber: "",
+        cvc: "",
+      });
     }
   }
 
@@ -69,9 +75,9 @@ export default function CardRegist() {
 
         <FormSection>
           <fieldset>
-            <legend>Card Regist</legend>
+            <legend>Add Card</legend>
             <form onSubmit={handleSubmit}>
-              {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
+              {error && <CalloutBox className="error"><h4 className="title">Info</h4> {error}</CalloutBox>}
 
               <InputGroup
                 type="text"
@@ -122,7 +128,7 @@ export default function CardRegist() {
                 readonly={true}
               />
               <ButtonPrimary type="submit" disabled={saveDisabled}>
-                Save Card
+                {saveDisabled ? "Saving..." : "Save Card"}
               </ButtonPrimary>
             </form>
           </fieldset>
