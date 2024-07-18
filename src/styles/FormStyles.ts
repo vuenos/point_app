@@ -9,7 +9,7 @@ const InputTypeText = styled.input`
     padding: 0 8px;
     border-width: 1px;
     border-style: solid;
-    border-color: ${(props) => props.readOnly ? "#eaebec" : "#cecece"};
+    border-color: ${(props) => props.readOnly ? "#eaebec" : "rgba(203,33,189,1)"};
     border-radius: 8px;
     color: ${(props) => props.readOnly ? "#bababa" : "#727272"};
     background-color: #ffffff;
@@ -57,7 +57,7 @@ const FormSection = styled.div`
 
     fieldset {
         width: 480px;
-        border: 1px solid #ccc;
+        border: 1px solid rgba(203,33,189,1);
         margin-bottom: 16px;
         border-radius: 8px;
         padding: 24px 40px;

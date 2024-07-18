@@ -9,10 +9,12 @@ import {useSession} from "next-auth/react";
 import Loading from "@/app/card/regist/loading";
 import {ButtonPrimary, CalloutBox, LinkStyle} from "@/styles/ComponentStyles";
 import onInput from "@/utils/onInput";
+import { RiInformation2Line } from "react-icons/ri";
 
 export default function CardRegist() {
 
-  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [resMsg, setResMsg] = useState<string>("");
+  const [calloutStatus, setCalloutStatus] = useState("normal")
   const [saveDisabled, setSaveDisabled] = useState<boolean>(false);
   const {data: session, status} = useSession();
   const router = useRouter();
@@ -41,9 +43,10 @@ export default function CardRegist() {
         userName: formData.get("userName"),
         userId: formData.get("userId"),
       });
-      if (res.status === 200) {
-        //
+      if (res.status === 201) {
         setLoading(true);
+        setCalloutStatus("normal");
+        setResMsg("Your card was saved successfully!!")
       }
       console.log(res.data)
 
@@ -51,9 +54,10 @@ export default function CardRegist() {
       console.log(error.message);
       setLoading(false);
       setSaveDisabled(false);
+      setCalloutStatus("error");
       if (error instanceof AxiosError) {
         const errorMessage = error.response?.data.message;
-        setErrorMsg(errorMessage);
+        setResMsg(errorMessage);
       }
     } finally {
       setLoading(false);
@@ -87,7 +91,13 @@ export default function CardRegist() {
           <fieldset>
             <legend>Add Card</legend>
             <form onSubmit={handleSubmit}>
-              {errorMsg && <CalloutBox className="error"><h4 className="title">Info</h4> {errorMsg}</CalloutBox>}
+              {resMsg 
+                ? <CalloutBox className={calloutStatus}>
+                    <h4 className="title"><RiInformation2Line /> Info</h4> 
+                    {resMsg}
+                  </CalloutBox>
+                : null
+              }
 
               <InputGroup
                 type="text"

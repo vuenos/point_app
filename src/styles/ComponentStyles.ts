@@ -136,12 +136,18 @@ const CalloutBox = styled.div`
     background-color: rgb(229, 246, 253);
 
     .title {
+        display: flex;
+        align-items: center;
         margin: -2px 0px 0.35em;
         font-family: Roboto, Helvetica, Arial, sans-serif;
         font-size: 1rem;
         line-height: 1.5;
         letter-spacing: 0.00938em;
         font-weight: 700;
+
+        svg {
+            margin-right: 6px;
+        }
     }
 
     &.error {
