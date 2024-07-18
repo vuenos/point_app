@@ -7,13 +7,15 @@ const InputTypeText = styled.input`
     width: 100%;
     height: 32px;
     padding: 0 8px;
-    border: 1px solid #cecece;
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${(props) => props.readOnly ? "#eaebec" : "#cecece"};
     border-radius: 8px;
-    color: #727272;
+    color: ${(props) => props.readOnly ? "#bababa" : "#727272"};
     background-color: #ffffff;
 
     &::placeholder {
-        color: #cacaca;
+        color: #dadada;
     }
 `;
 
