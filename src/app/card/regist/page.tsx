@@ -10,6 +10,7 @@ import Loading from "@/app/card/regist/loading";
 import {ButtonPrimary, CalloutBox, LinkStyle} from "@/styles/ComponentStyles";
 import onInput from "@/utils/onInput";
 import { RiInformation2Line } from "react-icons/ri";
+import pageToTop from "@/utils/pageToTop";
 
 export default function CardRegist() {
 
@@ -31,6 +32,7 @@ export default function CardRegist() {
   }, [status]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    pageToTop();
     event.preventDefault();
     setSaveDisabled(true);
 
