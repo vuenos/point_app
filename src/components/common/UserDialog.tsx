@@ -26,7 +26,7 @@ const UserDialog: React.FC<UserDialogProps> = ({isOpen, onClose, user}) => {
 
         <ul className="user-features">
           <li>
-            <Link href="/card/regist" scroll={false}>Add Card</Link>
+            <Link href="/card/regist" scroll={true}>Add Card</Link>
           </li>
         </ul>
 

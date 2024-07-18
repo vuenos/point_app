@@ -9,25 +9,32 @@ import {useSession} from "next-auth/react";
 import Loading from "@/app/card/regist/loading";
 import {ButtonPrimary, CalloutBox, LinkStyle} from "@/styles/ComponentStyles";
 import onInput from "@/utils/onInput";
+import { RiInformation2Line } from "react-icons/ri";
+import pageToTop from "@/utils/pageToTop";
 
 export default function CardRegist() {
 
-  const [error, setError] = useState();
+  const [resMsg, setResMsg] = useState<string>("");
+  const [calloutStatus, setCalloutStatus] = useState("normal")
+  const [saveDisabled, setSaveDisabled] = useState<boolean>(false);
   const {data: session, status} = useSession();
   const router = useRouter();
   const [formData, setFormData] = useState({
     cardNumber: "",
     cvc: "",
   });
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/member/login")
+      router.push("/member/login");
     }
   }, [status]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    pageToTop();
     event.preventDefault();
+    setSaveDisabled(true);
 
     try {
       const formData = new FormData(event.currentTarget);
@@ -38,14 +45,29 @@ export default function CardRegist() {
         userName: formData.get("userName"),
         userId: formData.get("userId"),
       });
+      if (res.status === 201) {
+        setLoading(true);
+        setCalloutStatus("normal");
+        setResMsg("Your card was saved successfully!!")
+      }
       console.log(res.data)
 
     } catch (error) {
       console.log(error.message);
+      setLoading(false);
+      setSaveDisabled(false);
+      setCalloutStatus("error");
       if (error instanceof AxiosError) {
         const errorMessage = error.response?.data.message;
-        setError(errorMessage);
+        setResMsg(errorMessage);
       }
+    } finally {
+      setLoading(false);
+      setSaveDisabled(false);
+      setFormData({
+        cardNumber: "",
+        cvc: "",
+      });
     }
   }
 
@@ -60,15 +82,24 @@ export default function CardRegist() {
     }
   };
 
+  if (loading) {
+    return <Loading />
+  }
+
   if (status === "authenticated") {
     return (
       <>
-
         <FormSection>
           <fieldset>
-            <legend>Card Regist</legend>
+            <legend>Add Card</legend>
             <form onSubmit={handleSubmit}>
-              {error && <CalloutBox className="error"><h4 className="title">Error</h4> {error}</CalloutBox>}
+              {resMsg 
+                ? <CalloutBox className={calloutStatus}>
+                    <h4 className="title"><RiInformation2Line /> Info</h4> 
+                    {resMsg}
+                  </CalloutBox>
+                : null
+              }
 
               <InputGroup
                 type="text"
@@ -118,8 +149,8 @@ export default function CardRegist() {
                 defaultValue={session?.user._id}
                 readonly={true}
               />
-              <ButtonPrimary type="submit">
-                Save Card
+              <ButtonPrimary type="submit" disabled={saveDisabled}>
+                {saveDisabled ? "Saving..." : "Save Card"}
               </ButtonPrimary>
             </form>
           </fieldset>
