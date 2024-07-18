@@ -12,7 +12,7 @@ import onInput from "@/utils/onInput";
 
 export default function CardRegist() {
 
-  const [error, setError] = useState();
+  const [errorMsg, setErrorMsg] = useState<string>("");
   const [saveDisabled, setSaveDisabled] = useState<boolean>(false);
   const {data: session, status} = useSession();
   const router = useRouter();
@@ -20,10 +20,11 @@ export default function CardRegist() {
     cardNumber: "",
     cvc: "",
   });
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/member/login")
+      router.push("/member/login");
     }
   }, [status]);
 
@@ -40,16 +41,22 @@ export default function CardRegist() {
         userName: formData.get("userName"),
         userId: formData.get("userId"),
       });
+      if (res.status === 200) {
+        //
+        setLoading(true);
+      }
       console.log(res.data)
 
     } catch (error) {
       console.log(error.message);
+      setLoading(false);
       setSaveDisabled(false);
       if (error instanceof AxiosError) {
         const errorMessage = error.response?.data.message;
-        setError(errorMessage);
+        setErrorMsg(errorMessage);
       }
     } finally {
+      setLoading(false);
       setSaveDisabled(false);
       setFormData({
         cardNumber: "",
@@ -69,15 +76,18 @@ export default function CardRegist() {
     }
   };
 
+  if (loading) {
+    return <Loading />
+  }
+
   if (status === "authenticated") {
     return (
       <>
-
         <FormSection>
           <fieldset>
             <legend>Add Card</legend>
             <form onSubmit={handleSubmit}>
-              {error && <CalloutBox className="error"><h4 className="title">Info</h4> {error}</CalloutBox>}
+              {errorMsg && <CalloutBox className="error"><h4 className="title">Info</h4> {errorMsg}</CalloutBox>}
 
               <InputGroup
                 type="text"
