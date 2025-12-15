@@ -34,7 +34,10 @@ export default function Header() {
             onClick={handleUserClick}
           >
             {(session?.user.image)
-              ? <img src={session.user.image} alt={session.user.name} width="100%"/>
+              ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={session.user.image} alt={session.user.name} width="100%"/>
+              )
               : <span>{(session?.user.name) ? (session?.user.name).substring(0, 1) : "U"}</span>
             }
           </UserNameButton>

@@ -1,49 +1,54 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import axios from "axios";
+import { useState, useEffect, useCallback } from "react";
+import axios, { AxiosError } from "axios";
 import Loading from "@/app/loading";
 import { CalloutBox } from "@/styles/ComponentStyles";
 
 type Users = {
-    userEmail: string,
-    userName: string,
-    _id: string,
-}
+    _id: string;
+    name?: string;
+    email?: string;
+    userEmail?: string;
+    userName?: string;
+};
 
 export default function GetUsers () {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState<Users[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState<boolean>(false);
     const [errMsg, setErrMsg] = useState<string>("");
 
-    const getUsersHandler = async () => {
+    const getUsersHandler = useCallback(async () => {
         try {
             const res = await axios.get("/api/users/");
-            // const data: Users[] = await res.json();
             
             if (res.status === 200) {
                 setUsers(res.data);
                 setLoading(false);
                 console.log(`USER_DATA::: ${res.data} ${JSON.stringify(res.data)}`);
             }
-        } catch(error) {
-            setError(true);            
+        } catch(err) {
+            setError(true);
             setLoading(false);
-            setErrMsg(
-                error.response && error.response.data.message
-                ? error.response.data.message
-                : error.message
-            );
-            console.log(error.message);
+            const message =
+                err instanceof AxiosError
+                    ? err.response?.data?.message ?? err.message
+                    : err instanceof Error
+                        ? err.message
+                        : "Unknown error";
+            setErrMsg(message);
+            console.log(message);
         }
-        
-    }
+    }, []);
 
     useEffect(() => {
         getUsersHandler();
+    }, [getUsersHandler]);
+
+    useEffect(() => {
         console.log(`USERS::: ${JSON.stringify(users)}`)
-    }, []);
+    }, [users]);
     
 
     if (loading) return <Loading />;

@@ -29,7 +29,7 @@ export default function CardRegist() {
     if (status === "unauthenticated") {
       router.push("/member/login");
     }
-  }, [status]);
+  }, [status, router]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     pageToTop();

@@ -38,7 +38,7 @@ export default function Mypage() {
     if (status === "unauthenticated") {
       router.push("/member/login");
     }
-  }, [status]);
+  }, [status, router]);
 
   useEffect(() => {
     if (session) {

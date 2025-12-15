@@ -1,9 +1,9 @@
 "use client";
-import { useRef } from "react";
+import { PropsWithChildren, useRef } from "react";
 import { MainSection } from "@/styles/LayoutStyles";
 
-export default function Wrapper({children}) {
-    const mainRef = useRef();
+export default function Wrapper({ children }: PropsWithChildren) {
+    const mainRef = useRef<HTMLElement | null>(null);
 
     return (
         <MainSection id="main" ref={mainRef}>
